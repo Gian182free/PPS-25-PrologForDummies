@@ -4,7 +4,7 @@ title: Prolog for Dummies
 ---
 
 <p align="center">
-  <img src="/resources/logo_pfd.png" alt="Prolog for Dummies Logo" width="420">
+  <img src="resources/logo_pfd.png" alt="Prolog for Dummies Logo" width="420">
 </p>
 
 # Introduzione
@@ -19,3 +19,4 @@ Per consolidare l’apprendimento, il sistema propone **quiz a risposta multipla
 - **Curriculum strutturato:** percorso di apprendimento organizzato per livelli di difficoltà.
 - **Didattica interattiva:** quiz mirati con correzione automatica e istantanea.
 - **Dashboard dei progressi:** monitoraggio continuo del percorso con statistiche su livelli completati, punteggi e percentuale di avanzamento.
+
