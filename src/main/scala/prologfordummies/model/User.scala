@@ -3,6 +3,9 @@ package prologfordummies.model
 import java.util.UUID
 import java.time.LocalDateTime
 
+/**
+ * Modello della classe User, utilizzatrice dell'applicazione.
+ */
 case class User(
   id: User.Id,
   username: User.Name,
