@@ -23,6 +23,10 @@ class UserRegistrationTest extends AnyFunSuite with Matchers:
     override def loadAll(): List[User] = users
     override def findByName(name: String): Option[User] = 
       users.find(_.username.asString == name)
+    override def update(userEdited: User): Unit = 
+      users = users.map(u => if u.id == userEdited.id then userEdited else u)
+    override def delete(id: User.Id): Unit = 
+      users = users.filterNot(_.id == id)
 
   test("signUp dovrebbe creare e salvare un utente") {
     val name = "UserTest"
@@ -52,4 +56,31 @@ class UserRegistrationTest extends AnyFunSuite with Matchers:
     UserRegistration.signUp("User2")
     
     testRepo.loadAll().size shouldBe (initialCount + 2)
+  }
+
+  test("delete dovrebbe rimuovere l'utente specificato") {
+    val user = UserRegistration.signUp("ToDelete")
+    testRepo.delete(user.id)
+    testRepo.findByName("ToDelete") shouldBe None
+  }
+
+  test("update dovrebbe modificare i dati di un utente già esistente") {
+    val user = UserRegistration.signUp("oldUser")
+    val updatedUser = user.copy(username = User.Name("newUser"))
+    
+    testRepo.update(updatedUser)
+    
+    testRepo.findByName("oldUser") shouldBe None
+    testRepo.findByName("newUser").isDefined shouldBe true
+  }
+
+  test("signup dovrebbe lanciare un'eccezione se il nome è vuoto") {
+    an [IllegalArgumentException] should be thrownBy UserRegistration.signUp("")
+  }
+
+  test("signup dovrebbe lanciare un'eccezione se il nome è già utilizzato") {
+    val name = "doppione"
+    UserRegistration.signUp(name)
+    
+    an [IllegalArgumentException] should be thrownBy UserRegistration.signUp(name)
   }

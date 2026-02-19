@@ -31,6 +31,16 @@ object UserServices:
     override def findByName(name: String): Option[User] = 
       loadAll().find(_.username.asString == name)
 
+    override def update(updatedUser: User): Unit =
+      val allUsers = loadAll()
+      val newUsers = allUsers.map(u => if u.id == updatedUser.id then updatedUser else u)
+      java.nio.file.Files.writeString(path, write(newUsers))
+
+    override def delete(id: User.Id): Unit =
+      val allUsers = loadAll()
+      val newUsers = allUsers.filterNot(_.id == id)
+      java.nio.file.Files.writeString(path, write(newUsers))
+
   // Implementazione Mock
   def mockCreator(fixedTime: LocalDateTime): UserCreator = 
     new UserCreator:

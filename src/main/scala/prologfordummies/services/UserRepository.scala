@@ -9,3 +9,5 @@ trait UserRepository:
   def save(user: User): Unit
   def loadAll(): List[User]
   def findByName(name: String): Option[User]
+  def update(user: User): Unit
+  def delete(id: User.Id): Unit
