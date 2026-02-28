@@ -4,9 +4,9 @@ import upickle.default.*
 import java.time.LocalDateTime
 import java.util.UUID
 
-/**
- * Questo oggetto definisce le istanze implicite di ReadWriter utilizzate da uPickle per convertire User da/e verso JSON.
- */
+/** Questo oggetto definisce le istanze implicite di ReadWriter utilizzate da
+  * uPickle per convertire User da/e verso JSON.
+  */
 object UserCodec:
 
   implicit val dateTimeRW: ReadWriter[LocalDateTime] =

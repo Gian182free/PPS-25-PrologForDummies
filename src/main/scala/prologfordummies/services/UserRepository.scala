@@ -10,4 +10,4 @@ trait UserRepository:
   def loadAll(): List[User]
   def findByName(name: String): Option[User]
   def update(user: User): Unit
-  def delete(id: User.Id): Unit
+  def delete(user: User): Unit
