@@ -3,7 +3,7 @@ package prologfordummies.services
 import prologfordummies.model.User
 
 /** 
- * Interfaccia di repository per la gestione dei dati utente.
+ * Interfaccia di User Repository per la gestione dei dati utente.
  */
 trait UserRepository:
   def save(user: User): Unit
