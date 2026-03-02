@@ -46,22 +46,30 @@ object LoginPage {
         promptText = "Inserisci username"
       }
 
+      val stateLabel = new Label("") {
+        style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
+        visible = false
+      }
+
       val loginBtn = styledButton(
         text = "Accedi",
         bgColor = "#4a90e2",
         textColor = "white",
         {
           val username = userField.text.value.trim
-          if (username.nonEmpty) {
-            val repo = UserRepositoryImpl.fileRepository
-            repo.findByName(username) match {
-              case Some(user) => UserSession.login(user); prologfordummies.Main.setPage(MenuPage.asParent)
-              case None =>
-                println(s"Utente $username non trovato")
-            }
+          username match {
+            case "" =>
+              stateLabel.text = "Inserire un nome utente"
+              stateLabel.visible = true
+            case u =>
+              val repo = UserRepositoryImpl.fileRepository
+              repo.findByName(username) match {
+                case Some(user) => UserSession.login(user); prologfordummies.Main.setPage(MenuPage.asParent)
+                case None =>
+                  stateLabel.text = "Utente non trovato"
+                  stateLabel.visible = true
+              }
           }
-          
-          prologfordummies.Main.setPage(MenuPage.asParent)  
         }
         
       )
@@ -89,10 +97,11 @@ object LoginPage {
       add(userLabel, 0, 2)
       add(userField, 0, 3)
       add(loginBtn, 0, 4)
-      add(separator, 0, 5)
-      add(registrationLabel, 0, 6)
+      add(stateLabel, 0, 5)
+      add(separator, 0, 6)
+      add(registrationLabel, 0, 7)
       GridPane.setHalignment(registrationLabel, scalafx.geometry.HPos.Center)
-      add(registerBtn, 0, 7)
+      add(registerBtn, 0, 8)
     }
 
     loginCard.maxWidthProperty().bind(width * 0.8)
