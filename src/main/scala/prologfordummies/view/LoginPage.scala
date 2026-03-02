@@ -1,14 +1,13 @@
 package prologfordummies.view
 
-import prologfordummies.model.{User, UserSession}
-import prologfordummies.services.{UserRepositoryImpl, UserService}
+import prologfordummies.controller.LoginController
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Pos}
-import scalafx.scene.control.{Label, TextField}
+import scalafx.scene.control.{Button, Label, Separator, TextField}
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
 import scalafx.scene.text.Font
-import scalafx.scene.control.Separator
 import scalafx.geometry.Orientation
+import scalafx.scene.image.ImageView
 
 
 object LoginPage {
@@ -19,9 +18,9 @@ object LoginPage {
     padding = Insets(20)
     style = "-fx-background-color: #f4f4f4;"
 
-    val logo = logoView(myFitWidth = 250)
+    val logo: ImageView = logoView(myFitWidth = 250)
 
-    val loginCard = new GridPane {
+    val loginCard: GridPane = new GridPane {
       alignment = Pos.Center
       hgap = 10
       vgap = 15
@@ -36,56 +35,45 @@ object LoginPage {
       column1.hgrow = Priority.Always
       columnConstraints.add(column1)
 
-      val header = new Label("Inserisci il tuo account") {
+      val header: Label = new Label("Inserisci il tuo account") {
         font = Font.font("System", 24)
         style = "-fx-font-weight: bold; -fx-text-fill: #333;"
       }
 
       val userLabel = new Label("Username:")
-      val userField = new TextField {
+      val userField: TextField = new TextField {
         promptText = "Inserisci username"
       }
 
-      val stateLabel = new Label("") {
+      val stateLabel: Label = new Label("") {
         style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
         visible = false
       }
 
-      val loginBtn = styledButton(
+      val loginBtn: Button = styledButton(
         text = "Accedi",
         bgColor = "#4a90e2",
         textColor = "white",
-        {
-          val username = userField.text.value.trim
-          username match {
-            case "" =>
-              stateLabel.text = "Inserire un nome utente"
-              stateLabel.visible = true
-            case u =>
-              val repo = UserRepositoryImpl.fileRepository
-              repo.findByName(username) match {
-                case Some(user) => UserSession.login(user); prologfordummies.Main.setPage(MenuPage.asParent)
-                case None =>
-                  stateLabel.text = "Utente non trovato"
-                  stateLabel.visible = true
-              }
-          }
+        LoginController.login(userField.text.value.trim) match {
+          case LoginController.Success(user) =>
+            LoginController.goToMenu()
+          case LoginController.Error(message) =>
+            stateLabel.text = message
+            stateLabel.visible = true
         }
-        
       )
-      
 
-      val separator = new Separator:
+      val separator: Separator = new Separator:
         orientation = Orientation.Horizontal
         maxWidth = Double.MaxValue
 
       val registrationLabel = new Label("Nuovo Utente?")
 
-      val registerBtn =styledButton(
+      val registerBtn: Button = styledButton(
         text = "Registrati",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        prologfordummies.Main.setPage(RegistrationPage.asParent)
+        LoginController.goToRegistration()
       )
 
       add(logo, 0, 0)
