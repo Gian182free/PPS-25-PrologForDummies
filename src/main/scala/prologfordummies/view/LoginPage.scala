@@ -1,5 +1,7 @@
 package prologfordummies.view
 
+import prologfordummies.model.{User, UserSession}
+import prologfordummies.services.{UserRepositoryImpl, UserService}
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Label, TextField}
@@ -48,8 +50,20 @@ object LoginPage {
         text = "Accedi",
         bgColor = "#4a90e2",
         textColor = "white",
-        //println(s"Login tentato per: ${userField.text.value}")
-        prologfordummies.Main.setPage(MenuPage.asParent)
+        {
+          val username = userField.text.value.trim
+          if (username.nonEmpty) {
+            val repo = UserRepositoryImpl.fileRepository
+            repo.findByName(username) match {
+              case Some(user) => UserSession.login(user); prologfordummies.Main.setPage(MenuPage.asParent)
+              case None =>
+                println(s"Utente $username non trovato")
+            }
+          }
+          
+          prologfordummies.Main.setPage(MenuPage.asParent)  
+        }
+        
       )
       
 

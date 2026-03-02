@@ -1,5 +1,6 @@
 package prologfordummies.view
 
+import prologfordummies.model.{User, UserSession}
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Orientation, Pos}
 import scalafx.scene.control.{Label, Separator}
@@ -8,7 +9,12 @@ import scalafx.scene.text.Font
 
 
 object MenuPage {
-  
+
+  def currentUserName: String =
+    UserSession.currentSessionUser match
+      case Some(user) => user.username.asString
+      case None => "Guest"
+
   def asParent: Region = new VBox {
     alignment = Pos.Center
     spacing = 10
@@ -32,7 +38,7 @@ object MenuPage {
       column1.hgrow = Priority.Always
       columnConstraints.add(column1)
 
-      val header = new Label("Ciao, getUser(TODO)") {
+      val header = new Label(s"Ciao, $currentUserName") {
         font = Font.font("System", 24)
         style = "-fx-font-weight: bold; -fx-text-fill: #333;"
       }
