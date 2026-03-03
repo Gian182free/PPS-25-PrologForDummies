@@ -16,10 +16,12 @@ object Question:
         correctAnswer: String,
         answers: List[String]
     ): Either[String, Question] =
-        if question.isEmpty then Left("Question cannot be empty")
-        else if answers.isEmpty then Left("Answer list cannot be empty")
-        else if !answers.contains(correctAnswer) then Left("Correct answer must be in the list")
-        else Right(Question(id, question, correctAnswer, answers))
+        (question, answers, correctAnswer) match
+            case (q, _, _) if q.isEmpty  => Left("Question cannot be empty")
+            case (_, ansList, _) if ansList.isEmpty => Left("Answer list cannot be empty")
+            case (_, ansList, c) if !ansList.contains(c) => Left("Correct answer must be in the list")
+            case _ => Right(Question(id, question, correctAnswer, answers))
+
 
     
 
