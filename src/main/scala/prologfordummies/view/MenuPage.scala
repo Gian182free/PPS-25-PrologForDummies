@@ -1,5 +1,6 @@
 package prologfordummies.view
 
+import prologfordummies.controller.MenuController
 import prologfordummies.model.{User, UserSession}
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Orientation, Pos}
@@ -47,7 +48,7 @@ object MenuPage {
         text = "Vai ai livelli",
         bgColor = "#4a90e2",
         textColor = "white",
-        println(s"Vai ai livelli")
+        MenuController.goToLevels()
       )
 
       val separator = new Separator:
@@ -58,22 +59,21 @@ object MenuPage {
         text = "Statistiche",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        //prologfordummies.Main.setPage(RegistrationPage.asParent)
-        println("Statistiche")
+        MenuController.goToStats()
       )
 
       val optionsBtn = styledButton(
         text = "Modifica Utente",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        prologfordummies.Main.setPage(EditUserPage.asParent)
+        MenuController.goToEditUser()
       )
 
       val exitBtn = styledButton(
         text = "Esci",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        prologfordummies.Main.setPage(LoginPage.asParent)
+        MenuController.logout()
       )
 
       add(logo, 0, 0)
