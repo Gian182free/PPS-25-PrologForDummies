@@ -14,7 +14,9 @@ import scalafx.scene.layout.HBox
 
 object LevelsPage {
 
-  def asParent(levels: List[Level]): Region = new VBox {
+  private val levels: List[Level] = LevelsController.loadLevels()
+
+  def asParent: Region = new VBox {
     alignment = Pos.TopCenter
     spacing = 0
     style = "-fx-background-color: white;"
@@ -30,7 +32,7 @@ object LevelsPage {
         bgColor = "#white",
         textColor = "#333",
         // TODO: reindirizzare al menu
-        prologfordummies.Main.setPage(LoginPage.asParent)
+        LevelsController.handleBackToMenu()
       )
     }
       

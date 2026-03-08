@@ -3,6 +3,7 @@ package prologfordummies.controller
 import prologfordummies.model.Level
 import prologfordummies.services.{LevelRepositoryImpl}
 import java.util.UUID
+import prologfordummies.Main
 
 object LevelsController {
 
@@ -14,6 +15,10 @@ object LevelsController {
       case None => onError(s"Livello con ID $idLevel non trovato")
     }
     // TODO: implementare la sessione livello
+  }
+
+  def handleBackToMenu(): Unit = {
+    // TODO: reindirizzare al menu
   }
 
   def loadLevels(): List[Level] = {

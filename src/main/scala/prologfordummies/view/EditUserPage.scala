@@ -3,6 +3,8 @@ package prologfordummies.view
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Button, Label, TextField}
 import scalafx.scene.image.{Image, ImageView}
+import prologfordummies.view.UIComponents.{logoView, styledButton}
+import scalafx.scene.layout._
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, VBox, Region}
 import scalafx.scene.text.Font
 import scalafx.scene.control.Separator
@@ -17,15 +19,6 @@ import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.ButtonType
 
 object EditUserPage {
-
-  def currentUserName: String = 
-    UserSession.currentSessionUser match
-      case Some(user) => user.username.asString
-      case None => "Guest"
-  def currentUser: User = 
-    UserSession.currentSessionUser match
-      case Some(user) => user
-      case None => throw new RuntimeException("No user logged in")
   
   def asParent: Region = new VBox {
     alignment = Pos.Center
@@ -33,13 +26,41 @@ object EditUserPage {
     padding = Insets(20)
     style = "-fx-background-color: #f4f4f4;"
 
-    val logoView = new ImageView {
-        image = new Image(getClass.getResourceAsStream("/logo_pfd.png"), 400, 0, true, true)
-        preserveRatio = true
-        fitWidth = 300
-        smooth = true
-    }
+    val headerContainer = new VBox {
 
+        spacing = 10
+        padding = Insets(15, 20, 0, 20)
+
+        val header = new HBox {
+          alignment = Pos.CenterLeft
+
+          val backBtn = styledButton(
+            text = "←",
+            bgColor = "transparent",
+            textColor = "#333",
+            EditUserController.handleBackToMenu()
+          )
+
+          backBtn.style =
+            """
+            -fx-background-color: #e0e0e0;
+            -fx-text-fill: #333;
+            -fx-border-color: #999;
+            -fx-font-size: 20px;
+            -fx-font-weight: bold;
+            -fx-cursor: hand;
+            """
+
+          children = Seq(backBtn)
+        }
+
+        val logoBox = new StackPane {
+          alignment = Pos.Center
+          children = Seq(logoView(myFitWidth = 250))
+        }
+
+        children = Seq(header, logoBox)
+    }
     val loginCard = new GridPane {
       alignment = Pos.Center
       hgap = 10
@@ -55,7 +76,7 @@ object EditUserPage {
       column1.hgrow = Priority.Always
       columnConstraints.add(column1)
 
-      val header = new Label(currentUserName) {
+      val header = new Label(EditUserController.currentUserName) {
         font = Font.font("System", 24)
         style = "-fx-font-weight: bold; -fx-text-fill: #333;"
       }
@@ -63,6 +84,7 @@ object EditUserPage {
       val userLabel = new Label("Inserisci il nuovo nome:")
       val userField = new TextField {
         promptText = "Inserisci username"
+        maxWidth() = 300
       }
 
       val stateLabel = new Label("") {
@@ -70,106 +92,107 @@ object EditUserPage {
         visible = false
       }
 
-      val editBtn = new Button("Modifica Utenza") {
-        maxWidth = Double.MaxValue
-        style = """
-            -fx-background-color: #4a90e2;
-            -fx-text-fill: white;
-            -fx-font-weight: bold;
-            -fx-cursor: hand;
-        """
-      }
+      val editBtn = styledButton(
+        text = "Modifica Utenza",
+        bgColor = "#4a90e2",
+        textColor = "white",
+        {
+          val inputName = userField.text.value.trim
 
+          UserSession.currentSessionUser match {
+            case Some(currentUser) =>
+              val updatedUser = currentUser.copy(username = User.Name(inputName))
+
+              EditUserController.handleEdit(
+                updatedUser,
+                user => {
+                  stateLabel.visible = true
+                  userField.clear()
+                  stateLabel.text = s"Utente aggiornato!"
+                  stateLabel.style = "-fx-text-fill: #388e3c; -fx-font-weight: bold;"
+                  
+                  header.text = user.username.asString
+
+                  val pause = new PauseTransition(scalafx.util.Duration(2000))
+                  pause.onFinished = _ => stateLabel.visible = false
+                  pause.play()
+                },
+                errorMsg => {
+                  stateLabel.text = errorMsg
+                  stateLabel.style = "-fx-text-fill: #d32f2f; -fx-font-weight: bold;"
+                  stateLabel.visible = true
+                }
+              )
+            case None =>
+              stateLabel.text = "Nessun utente loggato!"
+              stateLabel.visible = true
+          }
+        }
+      )
+
+      editBtn.maxWidth() = 200
       val separator = new Separator:
         orientation = Orientation.Horizontal
         maxWidth = Double.MaxValue
 
-      val deleteBtn = new Button("Elimina Utenza") {
-        maxWidth = Double.MaxValue
-        style = """
-              -fx-background-color: #e0e0e0;
-              -fx-text-fill: #333;
-              -fx-border-color: #999;
-              -fx-font-weight: bold;
-              -fx-cursor: hand;
-              """
-        onAction = _ => {
-          prologfordummies.Main.setPage(RegistrationPage.asParent)
+      val deleteBtn = styledButton(
+        text = "Elimina Utenza",
+        bgColor = "#e0e0e0",
+        textColor = "#d32f2f",
+        {
+          UserSession.currentSessionUser.foreach { user =>
+            val alert = new Alert(AlertType.Confirmation) {
+              initOwner(Main.stage)
+              title = "Conferma Eliminazione"
+              headerText = s"Stai per eliminare l'utente: ${user.username.asString}"
+              contentText = "Sei sicuro di voler procedere? L'operazione non è reversibile."
+            }
+
+            val result = alert.showAndWait()
+            result match {
+              case Some(ButtonType.OK) =>
+                EditUserController.handleDelete(
+                  user,
+                  _ => {
+                    stateLabel.text = "Utente eliminato con successo!"
+                    stateLabel.style = "-fx-text-fill: #388e3c; -fx-font-style: italic;"
+                    stateLabel.visible = true
+                    
+                    val pause = new PauseTransition(scalafx.util.Duration(2000))
+                    pause.onFinished = _ => EditUserController.backToRegistration()
+                    pause.play()
+                  },
+                  error => {
+                    stateLabel.text = error
+                    stateLabel.style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
+                    stateLabel.visible = true
+                  }
+                )
+              case _ => // L'utente ha annullato
+            }
+          }
         }
-      }
+      )
 
-      add(logoView, 0, 0)
-      GridPane.setHalignment(logoView, scalafx.geometry.HPos.Center)
-      GridPane.setMargin(logoView, Insets(0, 0, 20, 0))
+      deleteBtn.maxWidth() = 200
 
-      add(header, 0, 1, 2, 1)
+      add(headerContainer, 0, 0)
+      GridPane.setHalignment(headerContainer, scalafx.geometry.HPos.Center)
+      add(header, 0, 1)
       GridPane.setHalignment(header, scalafx.geometry.HPos.Center)
       add(userLabel, 0, 2)
+      GridPane.setHalignment(userLabel, scalafx.geometry.HPos.Center)
       add(userField, 0, 3)
+      GridPane.setHalignment(userField, scalafx.geometry.HPos.Center)
       add(editBtn, 0, 4)
+      GridPane.setHalignment(editBtn, scalafx.geometry.HPos.Center)
       add(stateLabel, 0, 5)
+      GridPane.setHalignment(stateLabel, scalafx.geometry.HPos.Center)
       add(separator, 0, 6)
-      add(deleteBtn, 0, 7)  
-
-      editBtn.onAction = _ => {
-        val inputName = userField.text.value.trim
-
-        UserSession.currentSessionUser match {
-          case Some(currentUser) =>
-            val updatedUser = currentUser.copy(username = User.Name(inputName))
-
-            EditUserController.handleEdit(
-              updatedUser,
-              user => {
-
-                stateLabel.visible = true
-                userField.clear()
-                stateLabel.text = s"Utente aggiornato!"
-                stateLabel.style = "-fx-text-fill: #388e3c; -fx-font-weight: bold;"
-                
-                header.text = user.username.asString
-
-                val pause = new PauseTransition(scalafx.util.Duration(2000))
-                pause.onFinished = _ => stateLabel.visible = false
-                pause.play()
-              },
-              errorMsg => {
-                stateLabel.text = errorMsg
-                stateLabel.style = "-fx-text-fill: #d32f2f; -fx-font-weight: bold;"
-                stateLabel.visible = true
-              }
-            )
-
-          case None => 
-            Main.setPage(LoginPage.asParent)
-      }
-}
-
-deleteBtn.onAction = _ => {
-  UserSession.currentSessionUser.foreach { user =>
-    // TODO: migliorare questo alert con un dialog custom più bello
-    val alert = new Alert(AlertType.Confirmation) {
-      initOwner(Main.stage)
-      title = "Conferma Eliminazione"
-      headerText = s"Stai per eliminare l'utente: ${user.username.asString}"
-      contentText = "Sei sicuro di voler procedere? L'operazione non è reversibile."
-    }
-    val result = alert.showAndWait()
-    result match {
-      case Some(ButtonType.OK) => 
-        EditUserController.handleDelete(
-          user,
-          _ => {
-            Main.setPage(RegistrationPage.asParent)
-          },
-          error => {
-            stateLabel.text = error
-            stateLabel.visible = true
-          }
-        )
-    }
-  }
-}
+      GridPane.setHalignment(separator, scalafx.geometry.HPos.Center)
+      add(deleteBtn, 0, 7) 
+      GridPane.setHalignment(deleteBtn, scalafx.geometry.HPos.Center)
+    
     }
 
     loginCard.maxWidthProperty().bind(width * 0.8)
