@@ -4,6 +4,7 @@ import prologfordummies.model.User
 import prologfordummies.services.{UserService, UserServiceImpl, UserRepositoryImpl}
 import prologfordummies.model.UserSession
 import prologfordummies.view.RegistrationPage
+import prologfordummies.view.MenuPage
 import prologfordummies.Main
 
 object EditUserController {
@@ -33,7 +34,7 @@ object EditUserController {
     }
 
     def handleBackToMenu(): Unit = {
-      // TODO: reindirizzare al menu
+      Main.setPage(MenuPage.asParent)
     }
 
     def currentUserName: String = 

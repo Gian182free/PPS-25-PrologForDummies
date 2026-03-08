@@ -18,7 +18,7 @@ object LevelsController {
   }
 
   def handleBackToMenu(): Unit = {
-    // TODO: reindirizzare al menu
+    Main.setPage(prologfordummies.view.MenuPage.asParent)
   }
 
   def loadLevels(): List[Level] = {
