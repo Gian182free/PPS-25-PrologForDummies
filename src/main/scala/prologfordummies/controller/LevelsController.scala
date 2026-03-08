@@ -8,13 +8,18 @@ import prologfordummies.Main
 object LevelsController {
 
   private given repo: prologfordummies.services.LevelRepository = LevelRepositoryImpl.fileRepository
+  
+  def loadLevel(): Unit = {
+    Main.setPage(prologfordummies.view.QuizPage.asParent)
+
+  }
 
   def handleLevelSelected(idLevel: UUID, onSuccess: Level => Unit, onError: String => Unit): Unit = {
     repo.loadAll().find(_.id == idLevel) match {
       case Some(level) => onSuccess(level)
       case None => onError(s"Livello con ID $idLevel non trovato")
     }
-    // TODO: implementare la sessione livello
+    Main.setPage(prologfordummies.view.QuizPage.asParent)
   }
 
   def handleBackToMenu(): Unit = {

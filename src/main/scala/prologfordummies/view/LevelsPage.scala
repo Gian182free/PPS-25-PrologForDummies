@@ -1,5 +1,6 @@
 package prologfordummies.view
 
+import prologfordummies.controller
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.control.{Label, TextField}
@@ -55,7 +56,8 @@ object LevelsPage {
         levelTile(
           lvl.title.asString, 
           lvl.questions.size, 
-          println(s"Inizia livello: ${lvl.title.asString}")
+          //println(s"Inizia livello: ${lvl.title.asString}");
+          LevelsController.loadLevel()
         )
       }
     }
