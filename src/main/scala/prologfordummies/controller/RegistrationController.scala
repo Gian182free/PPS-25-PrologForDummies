@@ -2,6 +2,7 @@ package prologfordummies.controller
 
 import prologfordummies.model.User
 import prologfordummies.services.{UserService, UserServiceImpl, UserRepositoryImpl}
+import prologfordummies.view.LoginPage
 
 object RegistrationController {
 
@@ -15,5 +16,9 @@ object RegistrationController {
       case Left(errorMessage) => 
         onError(errorMessage)
     }
+  }
+
+  def handleBackToLogin(): Unit = {
+    prologfordummies.Main.setPage(LoginPage.asParent)
   }
 }
