@@ -37,6 +37,9 @@ object Main extends JFXApp3 {
       title = "Prolog For Dummies"
       width = 800
       height = 600
+      maximized = true 
+      minWidth = 600
+      minHeight = 800
       scene = new Scene {
         root = SplashView.asParent
       }
