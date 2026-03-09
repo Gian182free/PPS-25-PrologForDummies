@@ -4,7 +4,7 @@ import prologfordummies.controller.QuizController
 import prologfordummies.model.Level
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Pos}
-import scalafx.scene.control.{Label, TextArea}
+import scalafx.scene.control.{Button, Label, TextArea}
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
 import scalafx.scene.text.Font
 
@@ -65,32 +65,32 @@ object QuizPage {
 
       val answers = currentQuestion.answers.padTo(4, "")
 
-      val option1Btn = styledButton(
+      lazy val option1Btn: Button = styledButton(
         text = answers.head,
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(1)
+        QuizController.submitAnswer(option1Btn, currentQuestion, answers.head)
       )
 
-      val option2Btn = styledButton(
+      lazy val option2Btn: Button = styledButton(
         text = answers(1),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(2)
+        QuizController.submitAnswer(option2Btn, currentQuestion, answers(1))
       )
 
-      val option3Btn = styledButton(
+      lazy val option3Btn: Button = styledButton(
         text = answers(2),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(3)
+        QuizController.submitAnswer(option3Btn, currentQuestion, answers(2))
       )
 
-      val option4Btn = styledButton(
+      lazy val option4Btn: Button = styledButton(
         text = answers(3),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(4)
+        QuizController.submitAnswer(option4Btn, currentQuestion, answers(3))
       )
 
       val backBtn = styledButton(
