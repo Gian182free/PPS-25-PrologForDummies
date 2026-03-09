@@ -1,17 +1,18 @@
 package prologfordummies.controller
 
 import prologfordummies.model.Level
-import prologfordummies.services.{LevelRepositoryImpl}
+import prologfordummies.services.LevelRepositoryImpl
 import java.util.UUID
 import prologfordummies.Main
+
+
 
 object LevelsController {
 
   private given repo: prologfordummies.services.LevelRepository = LevelRepositoryImpl.fileRepository
-  
-  def loadLevel(): Unit = {
-    Main.setPage(prologfordummies.view.QuizPage.asParent)
 
+  def loadLevel(level: Level): Unit = {
+    Main.setPage(prologfordummies.view.QuizPage.asParent(level))
   }
 
   def handleLevelSelected(idLevel: UUID, onSuccess: Level => Unit, onError: String => Unit): Unit = {
@@ -19,7 +20,7 @@ object LevelsController {
       case Some(level) => onSuccess(level)
       case None => onError(s"Livello con ID $idLevel non trovato")
     }
-    Main.setPage(prologfordummies.view.QuizPage.asParent)
+    //Main.setPage(prologfordummies.view.QuizPage.asParent(level))
   }
 
   def handleBackToMenu(): Unit = {

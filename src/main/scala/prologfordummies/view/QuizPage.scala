@@ -1,6 +1,7 @@
 package prologfordummies.view
 
 import prologfordummies.controller.QuizController
+import prologfordummies.model.Level
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Label, TextArea}
@@ -9,11 +10,13 @@ import scalafx.scene.text.Font
 
 object QuizPage {
 
-  def asParent: Region = new VBox {
+  def asParent(level: Level): Region = new VBox {
     alignment = Pos.Center
     spacing = 10
     padding = Insets(20)
     style = "-fx-background-color: #f4f4f4;"
+
+    val currentQuestion = level.questions.head
 
     val logo = logoView(myFitWidth = 250)
 
@@ -41,11 +44,7 @@ object QuizPage {
       columnConstraints.add(column2)
 
       val textArea = new TextArea {
-        text =
-          """Teoria della domanda
-            |da inserire.
-            |""".stripMargin
-
+        text = level.theory.asString
         editable = false
         wrapText = true
         prefWidth = 500
@@ -53,39 +52,42 @@ object QuizPage {
         minWidth = 300
       }
 
-      val header = new Label("Domanda del Quiz") {
+      val header = new Label(s"Quiz: ${level.title.asString}") {
         font = Font.font("System", 24)
         style = "-fx-font-weight: bold; -fx-text-fill: #333;"
       }
 
-      val questionLabel = new Label("Qual è la risposta corretta?") {
+      val questionLabel = new Label(currentQuestion.question) {
         font = Font.font("System", 18)
         style = "-fx-text-fill: #555;"
+        wrapText = true
       }
 
+      val answers = currentQuestion.answers.padTo(4, "")
+
       val option1Btn = styledButton(
-        text = "Opzione 1",
+        text = answers.head,
         bgColor = "#e0e0e0",
         textColor = "#333",
         QuizController.submitAnswer(1)
       )
 
       val option2Btn = styledButton(
-        text = "Opzione 2",
+        text = answers(1),
         bgColor = "#e0e0e0",
         textColor = "#333",
         QuizController.submitAnswer(2)
       )
 
       val option3Btn = styledButton(
-        text = "Opzione 3",
+        text = answers(2),
         bgColor = "#e0e0e0",
         textColor = "#333",
         QuizController.submitAnswer(3)
       )
 
       val option4Btn = styledButton(
-        text = "Opzione 4",
+        text = answers(3),
         bgColor = "#e0e0e0",
         textColor = "#333",
         QuizController.submitAnswer(4)

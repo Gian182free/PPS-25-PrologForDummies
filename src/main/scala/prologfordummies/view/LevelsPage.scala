@@ -57,7 +57,7 @@ object LevelsPage {
           lvl.title.asString, 
           lvl.questions.size, 
           //println(s"Inizia livello: ${lvl.title.asString}");
-          LevelsController.loadLevel()
+          LevelsController.loadLevel(lvl)
         )
       }
     }
