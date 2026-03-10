@@ -3,7 +3,7 @@ package prologfordummies.view
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Button, Label, TextField}
 import scalafx.scene.image.{Image, ImageView}
-import prologfordummies.view.UIComponents.{logoView, styledButton}
+import prologfordummies.view.UIComponents.{logoView, styledButton, showCustomConfirm}
 import scalafx.scene.layout._
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, VBox, Region}
 import scalafx.scene.text.Font
@@ -137,25 +137,21 @@ object EditUserPage {
 
       val deleteBtn = styledButton(
         text = "Elimina Utenza",
-        bgColor = "#e0e0e0",
+        bgColor = "#f8f9fa",
         textColor = "#d32f2f",
         {
           UserSession.currentSessionUser.foreach { user =>
-            val alert = new Alert(AlertType.Confirmation) {
-              initOwner(Main.stage)
-              title = "Conferma Eliminazione"
-              headerText = s"Stai per eliminare l'utente: ${user.username.asString}"
-              contentText = "Sei sicuro di voler procedere? L'operazione non è reversibile."
-            }
-
-            val result = alert.showAndWait()
-            result match {
-              case Some(ButtonType.OK) =>
+            showCustomConfirm(
+              "Conferma Eliminazione",
+              s"Sei sicuro di voler eliminare l'utente: ${user.username.asString}?",
+              "Elimina",
+              "Annulla",
+              () => {
                 EditUserController.handleDelete(
                   user,
                   _ => {
-                    stateLabel.text = "Utente eliminato con successo!"
-                    stateLabel.style = "-fx-text-fill: #388e3c; -fx-font-style: italic;"
+                    stateLabel.text = "Utente eliminato!"
+                    stateLabel.style = "-fx-text-fill: #388e3c; -fx-font-weight: bold;"
                     stateLabel.visible = true
                     
                     val pause = new PauseTransition(scalafx.util.Duration(2000))
@@ -164,16 +160,15 @@ object EditUserPage {
                   },
                   error => {
                     stateLabel.text = error
-                    stateLabel.style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
+                    stateLabel.style = "-fx-text-fill: #d32f2f; -fx-font-weight: bold;"
                     stateLabel.visible = true
                   }
                 )
-              case _ => // L'utente ha annullato
-            }
+              }
+            )
           }
         }
       )
-
       deleteBtn.maxWidth() = 200
 
       add(headerContainer, 0, 0)
