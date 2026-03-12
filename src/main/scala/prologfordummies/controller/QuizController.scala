@@ -6,6 +6,7 @@ import scalafx.scene.control.Button
 import scalafx.animation.PauseTransition
 import scalafx.util.Duration
 import prologfordummies.model.Level
+import prologfordummies.view.UIComponents.showCustomConfirm
 
 object QuizController {
 
@@ -27,16 +28,27 @@ object QuizController {
     pause.play()
   }
 
-  def backToLevels(): Unit = {
+  private def backToLevels(): Unit = {
     prologfordummies.Main.setPage(LevelsPage.asParent)
   }
 
-  def nextQuestion(level: Level, currentIndex: Int): Option[Int] =
-    level.questions.lift(currentIndex + 1).map(_ => currentIndex + 1)
+  def confirmBackToLevels(): Unit = {
+    showCustomConfirm(
+      head = "Conferma uscita",
+      message = "Sei sicuro di voler uscire dal quiz e tornare ai livelli?",
+      confirmButtonMsg = "Esci",
+      declinedButtonMsg = "Annulla",
+      onConfirm = () => backToLevels()
+    )
+  }
 
-  def goToNext(level: Level, currentIndex: Int): Unit =
+  private def nextQuestion(level: Level, currentIndex: Int): Option[Int] =
+    val nextIndex = currentIndex + 1
+    level.questions.lift(nextIndex).map(_ => nextIndex)
+
+  private def goToNext(level: Level, currentIndex: Int): Unit =
     nextQuestion(level, currentIndex) match
       case Some(i) => prologfordummies.Main.setPage(QuizPage.asParent(level, i))
       case None => backToLevels()
-
+      
 }

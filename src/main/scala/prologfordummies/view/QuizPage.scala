@@ -97,7 +97,7 @@ object QuizPage {
         text = "Torna ai Livelli",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.backToLevels()
+        QuizController.confirmBackToLevels()
       )
 
       add(logo, 0, 0, 2, 1)

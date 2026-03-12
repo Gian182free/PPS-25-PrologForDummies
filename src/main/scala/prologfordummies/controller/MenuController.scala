@@ -1,5 +1,6 @@
 package prologfordummies.controller
 
+import prologfordummies.view.UIComponents.showCustomConfirm
 import prologfordummies.view.{EditUserPage, LevelsPage, LoginPage}
 
 object MenuController {
@@ -18,6 +19,16 @@ object MenuController {
 
   def logout(): Unit = {
     prologfordummies.Main.setPage(LoginPage.asParent)
+  }
+  
+  def confirmLogout(): Unit = {
+    showCustomConfirm(
+      head = "Conferma uscita",
+      message = "Sei sicuro di voler uscire e tornare al login?",
+      confirmButtonMsg = "Esci",
+      declinedButtonMsg = "Annulla",
+      onConfirm = () => logout()
+    )
   }
 
 }

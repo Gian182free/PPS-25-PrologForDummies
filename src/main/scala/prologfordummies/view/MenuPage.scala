@@ -73,7 +73,7 @@ object MenuPage {
         text = "Esci",
         bgColor = "#e0e0e0",
         textColor = "#333",
-        MenuController.logout()
+        MenuController.confirmLogout()
       )
 
       add(logo, 0, 0)
