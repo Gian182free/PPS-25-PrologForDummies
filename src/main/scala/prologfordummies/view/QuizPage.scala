@@ -10,13 +10,13 @@ import scalafx.scene.text.Font
 
 object QuizPage {
 
-  def asParent(level: Level): Region = new VBox {
+  def asParent(level: Level, index: Int = 0): Region = new VBox {
     alignment = Pos.Center
     spacing = 10
     padding = Insets(20)
     style = "-fx-background-color: #f4f4f4;"
 
-    val currentQuestion = level.questions.head
+    private val currentQuestion = level.questions(index)
 
     val logo = logoView(myFitWidth = 250)
 
@@ -69,28 +69,28 @@ object QuizPage {
         text = answers.head,
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(option1Btn, currentQuestion, answers.head)
+        QuizController.submitAnswer(option1Btn, currentQuestion, answers.head, level, index)
       )
 
       lazy val option2Btn: Button = styledButton(
         text = answers(1),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(option2Btn, currentQuestion, answers(1))
+        QuizController.submitAnswer(option2Btn, currentQuestion, answers(1), level, index)
       )
 
       lazy val option3Btn: Button = styledButton(
         text = answers(2),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(option3Btn, currentQuestion, answers(2))
+        QuizController.submitAnswer(option3Btn, currentQuestion, answers(2), level, index)
       )
 
       lazy val option4Btn: Button = styledButton(
         text = answers(3),
         bgColor = "#e0e0e0",
         textColor = "#333",
-        QuizController.submitAnswer(option4Btn, currentQuestion, answers(3))
+        QuizController.submitAnswer(option4Btn, currentQuestion, answers(3), level, index)
       )
 
       val backBtn = styledButton(
