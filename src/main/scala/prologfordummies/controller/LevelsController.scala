@@ -12,7 +12,7 @@ object LevelsController {
   private given repo: prologfordummies.services.LevelRepository = LevelRepositoryImpl.fileRepository
 
   def loadLevel(level: Level): Unit = {
-    Main.setPage(prologfordummies.view.QuizPage.asParent(level))
+    QuizController.loadQuestionPage(level, 0)
   }
 
   def handleLevelSelected(idLevel: UUID, onSuccess: Level => Unit, onError: String => Unit): Unit = {

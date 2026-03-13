@@ -1,12 +1,13 @@
 package prologfordummies.controller
 
 import prologfordummies.model.Question
-import prologfordummies.view.{LevelsPage, QuizPage}
+import prologfordummies.view.{LevelsPage, QuizPage, OpenQuizPage}
 import scalafx.scene.control.Button
 import scalafx.animation.PauseTransition
 import scalafx.util.Duration
 import prologfordummies.model.Level
 import prologfordummies.view.UIComponents.showCustomConfirm
+import prologfordummies.model.QuestionType
 
 object QuizController {
 
@@ -48,7 +49,16 @@ object QuizController {
 
   private def goToNext(level: Level, currentIndex: Int): Unit =
     nextQuestion(level, currentIndex) match
-      case Some(i) => prologfordummies.Main.setPage(QuizPage.asParent(level, i))
+      case Some(i) => loadQuestionPage(level, i)
       case None => backToLevels()
-      
+
+  def loadQuestionPage(level: Level, index: Int): Unit =
+    val q = level.questions(index)
+
+    q.qType match
+      case QuestionType.MultipleChoice =>
+        prologfordummies.Main.setPage(QuizPage.asParent(level, index))
+      case QuestionType.OpenQuestion =>
+        prologfordummies.Main.setPage(OpenQuizPage.asParent(level, index))
+
 }
