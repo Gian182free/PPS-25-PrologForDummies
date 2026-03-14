@@ -4,14 +4,19 @@ import prologfordummies.controller.LoginController
 import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Button, Label, Separator, TextField}
-import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
+import scalafx.scene.layout.{
+  ColumnConstraints,
+  GridPane,
+  Priority,
+  Region,
+  VBox
+}
 import scalafx.scene.text.Font
 import scalafx.geometry.Orientation
 import scalafx.scene.image.ImageView
 
-
 object LoginPage {
-  
+
   def asParent: Region = new VBox {
     alignment = Pos.Center
     spacing = 10
@@ -45,6 +50,8 @@ object LoginPage {
         promptText = "Inserisci username"
       }
 
+      userField.maxWidth() = 300
+
       val stateLabel: Label = new Label("") {
         style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
         visible = false
@@ -63,9 +70,11 @@ object LoginPage {
         }
       )
 
-      val separator: Separator = new Separator:
+      loginBtn.maxWidth() = 200
+      val separator: Separator = new Separator {
         orientation = Orientation.Horizontal
         maxWidth = Double.MaxValue
+      }
 
       val registrationLabel = new Label("Nuovo Utente?")
 
@@ -76,6 +85,8 @@ object LoginPage {
         LoginController.goToRegistration()
       )
 
+      registerBtn.maxWidth() = 200
+
       add(logo, 0, 0)
       GridPane.setHalignment(logo, scalafx.geometry.HPos.Center)
       GridPane.setMargin(logo, Insets(0, 0, 20, 0))
@@ -83,13 +94,18 @@ object LoginPage {
       add(header, 0, 1, 2, 1)
       GridPane.setHalignment(header, scalafx.geometry.HPos.Center)
       add(userLabel, 0, 2)
+      GridPane.setHalignment(userLabel, scalafx.geometry.HPos.Center)
       add(userField, 0, 3)
+      GridPane.setHalignment(userField, scalafx.geometry.HPos.Center)
       add(loginBtn, 0, 4)
+      GridPane.setHalignment(loginBtn, scalafx.geometry.HPos.Center)
       add(stateLabel, 0, 5)
+      GridPane.setHalignment(stateLabel, scalafx.geometry.HPos.Center)
       add(separator, 0, 6)
       add(registrationLabel, 0, 7)
       GridPane.setHalignment(registrationLabel, scalafx.geometry.HPos.Center)
       add(registerBtn, 0, 8)
+      GridPane.setHalignment(registerBtn, scalafx.geometry.HPos.Center)
     }
 
     loginCard.maxWidthProperty().bind(width * 0.8)

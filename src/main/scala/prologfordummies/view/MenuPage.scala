@@ -8,13 +8,12 @@ import scalafx.scene.control.{Label, Separator}
 import scalafx.scene.layout.*
 import scalafx.scene.text.Font
 
-
 object MenuPage {
 
   def currentUserName: String =
     UserSession.currentSessionUser match
       case Some(user) => user.username.asString
-      case None => "Guest"
+      case None       => "Guest"
 
   def asParent: Region = new VBox {
     alignment = Pos.Center
@@ -51,6 +50,7 @@ object MenuPage {
         MenuController.goToLevels()
       )
 
+      startBtn.maxWidth() = 200
       val separator = new Separator:
         orientation = Orientation.Horizontal
         maxWidth = Double.MaxValue
@@ -62,12 +62,16 @@ object MenuPage {
         MenuController.goToStats()
       )
 
+      statsBtn.maxWidth() = 200
+
       val optionsBtn = styledButton(
         text = "Modifica Utente",
         bgColor = "#e0e0e0",
         textColor = "#333",
         MenuController.goToEditUser()
       )
+
+      optionsBtn.maxWidth() = 200
 
       val exitBtn = styledButton(
         text = "Esci",
@@ -76,6 +80,8 @@ object MenuPage {
         MenuController.confirmLogout()
       )
 
+      exitBtn.maxWidth() = 200
+
       add(logo, 0, 0)
       GridPane.setHalignment(logo, scalafx.geometry.HPos.Center)
       GridPane.setMargin(logo, Insets(0, 0, 20, 0))
@@ -83,10 +89,14 @@ object MenuPage {
       add(header, 0, 1, 2, 1)
       GridPane.setHalignment(header, scalafx.geometry.HPos.Center)
       add(startBtn, 0, 2)
+      GridPane.setHalignment(startBtn, scalafx.geometry.HPos.Center)
       add(separator, 0, 3)
       add(statsBtn, 0, 4)
+      GridPane.setHalignment(statsBtn, scalafx.geometry.HPos.Center)
       add(optionsBtn, 0, 6)
+      GridPane.setHalignment(optionsBtn, scalafx.geometry.HPos.Center)
       add(exitBtn, 0, 8)
+      GridPane.setHalignment(exitBtn, scalafx.geometry.HPos.Center)
 
     }
 

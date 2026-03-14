@@ -11,7 +11,8 @@ lazy val root = project
     libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.19" % Test,
     "com.lihaoyi" %% "fansi" % "0.4.0",
     "org.scalafx" %% "scalafx" % "23.0.1-R34",
-    "com.lihaoyi" %% "upickle" % "3.1.0"
+    "com.lihaoyi" %% "upickle" % "3.1.0",
+    "it.unibo.alice.tuprolog" % "tuprolog" % "3.3.0"
     )
 
   )
