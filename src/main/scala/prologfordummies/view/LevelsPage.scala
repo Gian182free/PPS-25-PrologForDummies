@@ -1,7 +1,7 @@
 package prologfordummies.view
 
 import prologfordummies.controller
-import prologfordummies.view.UIComponents.{logoView, styledButton}
+import prologfordummies.view.UIComponents.{logoView, styledButton, backButton}
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.control.{Label, TextField}
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
@@ -26,13 +26,12 @@ object LevelsPage {
       padding = Insets(10, 20, 10, 20)
       style = "-fx-background-color: #f8f8f8; -fx-border-color: #ddd; -fx-border-width: 0 0 2 0;"
       
+
       val backBtnContainer = new HBox {
       alignment = Pos.TopLeft
-      children = styledButton(
-        text = "←",
-        bgColor = "#white",
-        textColor = "#333",
-        LevelsController.handleBackToMenu()
+      
+      children = Seq(
+        backButton(LevelsController.handleBackToMenu())
       )
     }
       
@@ -55,7 +54,6 @@ object LevelsPage {
         levelTile(
           lvl.title.asString, 
           lvl.questions.size, 
-          //println(s"Inizia livello: ${lvl.title.asString}");
           LevelsController.loadLevel(lvl)
         )
       }

@@ -3,7 +3,7 @@ package prologfordummies.view
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Button, Label, TextField}
 import scalafx.scene.image.{Image, ImageView}
-import prologfordummies.view.UIComponents.{logoView, styledButton, showCustomConfirm}
+import prologfordummies.view.UIComponents.{logoView, styledButton, showCustomConfirm, backButton}
 import scalafx.scene.layout._
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, VBox, Region}
 import scalafx.scene.text.Font
@@ -33,25 +33,9 @@ object EditUserPage {
 
         val header = new HBox {
           alignment = Pos.CenterLeft
-
-          val backBtn = styledButton(
-            text = "←",
-            bgColor = "transparent",
-            textColor = "#333",
-            EditUserController.handleBackToMenu()
+          children = Seq(
+            backButton(EditUserController.handleBackToMenu())
           )
-
-          backBtn.style =
-            """
-            -fx-background-color: #e0e0e0;
-            -fx-text-fill: #333;
-            -fx-border-color: #999;
-            -fx-font-size: 20px;
-            -fx-font-weight: bold;
-            -fx-cursor: hand;
-            """
-
-          children = Seq(backBtn)
         }
 
         val logoBox = new StackPane {

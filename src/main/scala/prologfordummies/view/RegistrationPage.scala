@@ -2,12 +2,11 @@ package prologfordummies.view
 
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.{Label, TextField}
-import prologfordummies.view.UIComponents.{logoView, styledButton}
+import prologfordummies.view.UIComponents.{logoView, styledButton, backButton}
 import scalafx.scene.layout._
 import scalafx.scene.text.Font
 import prologfordummies.controller.RegistrationController
 import prologfordummies.Main
-import prologfordummies.view.UIComponents.{logoView, styledButton}
 import scalafx.animation.PauseTransition
 
 object RegistrationPage {
@@ -33,24 +32,9 @@ object RegistrationPage {
         val header = new HBox {
           alignment = Pos.CenterLeft
 
-          val backBtn = styledButton(
-            text = "←",
-            bgColor = "transparent",
-            textColor = "#333",
-            RegistrationController.handleBackToLogin()
+          children = Seq(
+            backButton(RegistrationController.handleBackToLogin())
           )
-
-          backBtn.style =
-            """
-            -fx-background-color: #e0e0e0;
-            -fx-text-fill: #333;
-            -fx-border-color: #999;
-            -fx-font-size: 20px;
-            -fx-font-weight: bold;
-            -fx-cursor: hand;
-            """
-
-          children = Seq(backBtn)
         }
 
         val logoBox = new StackPane {

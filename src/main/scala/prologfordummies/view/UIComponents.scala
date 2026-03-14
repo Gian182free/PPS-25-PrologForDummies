@@ -54,82 +54,92 @@ object UIComponents {
            -fx-font-weight: bold;
            -fx-cursor: hand;
         """
-      onAction = _ => onClick
+      onAction() = _ => onClick
     }
 
-  /* 
-  * Modale con titolo, messaggio e testo dei bottoni customizzabile.
-  */
+  /*
+   * Modale con titolo, messaggio e testo dei bottoni customizzabile.
+   */
   def showCustomConfirm(
-    head: String, 
-    message: String,
-    confirmButtonMsg: String, 
-    declinedButtonMsg: String, 
-    onConfirm: () => Unit
+      head: String,
+      message: String,
+      confirmButtonMsg: String,
+      declinedButtonMsg: String,
+      onConfirm: () => Unit
   ): Unit = {
-  val dialog: Stage = new Stage {
-    initModality(Modality.ApplicationModal)
-    initOwner(Main.stage)
-    initStyle(StageStyle.Undecorated) 
-    resizable = false
-    
-    scene = new Scene(500, 300) { 
-      root = new VBox {
-        alignment = Pos.Center
-        spacing = 25
-        padding = Insets(30)
-        style = """
+    val dialog: Stage = new Stage {
+      initModality(Modality.ApplicationModal)
+      initOwner(Main.stage)
+      initStyle(StageStyle.Undecorated)
+      resizable = false
+
+      scene = new Scene(500, 300) {
+        root = new VBox {
+          alignment = Pos.Center
+          spacing = 25
+          padding = Insets(30)
+          style = """
             -fx-background-color: white;
             -fx-background-radius: 0; 
             -fx-border-color: #333333;
             -fx-border-width: 1;
             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
-        """            
-        children = Seq(
-          new Label(head) { 
-            style = "-fx-font-weight: bold; -fx-font-size: 22px; -fx-text-fill: #333;" 
-          },
-          new Label(message) { 
-            wrapText = true
-            alignment = Pos.Center
-            maxWidth = 440
-            style = "-fx-font-size: 15px; -fx-text-fill: #555;"
-          },
-          new HBox {
-            alignment = Pos.Center
-            spacing = 20
-            children = Seq(
-              {
-                val buttonCancel = styledButton(declinedButtonMsg, "#eeeeee", "#333", { 
-                  delegate.getScene.getWindow.hide() 
-                })
-                buttonCancel.minWidth = 120
-                buttonCancel.style = buttonCancel.style.value + "-fx-background-radius: 0;"
-                buttonCancel
-              },
-              {
-                val buttonConfirm = styledButton(confirmButtonMsg, "#d32f2f", "white", { 
-                  onConfirm()
-                  delegate.getScene.getWindow.hide()
-                })
-                buttonConfirm.minWidth = 120
-                buttonConfirm.style = buttonConfirm.style.value + "-fx-background-radius: 0;"
-                buttonConfirm
-              }
-            )
-          }
-        )
+        """
+          children = Seq(
+            new Label(head) {
+              style =
+                "-fx-font-weight: bold; -fx-font-size: 22px; -fx-text-fill: #333;"
+            },
+            new Label(message) {
+              wrapText = true
+              alignment = Pos.Center
+              maxWidth = 440
+              style = "-fx-font-size: 15px; -fx-text-fill: #555;"
+            },
+            new HBox {
+              alignment = Pos.Center
+              spacing = 20
+              children = Seq(
+                {
+                  val buttonCancel = styledButton(
+                    declinedButtonMsg,
+                    "#eeeeee",
+                    "#333", {
+                      delegate.getScene.getWindow.hide()
+                    }
+                  )
+                  buttonCancel.minWidth = 120
+                  buttonCancel.style =
+                    buttonCancel.style.value + "-fx-background-radius: 0;"
+                  buttonCancel
+                }, {
+                  val buttonConfirm = styledButton(
+                    confirmButtonMsg,
+                    "#d32f2f",
+                    "white", {
+                      onConfirm()
+                      delegate.getScene.getWindow.hide()
+                    }
+                  )
+                  buttonConfirm.minWidth = 120
+                  buttonConfirm.style =
+                    buttonConfirm.style.value + "-fx-background-radius: 0;"
+                  buttonConfirm
+                }
+              )
+            }
+          )
+        }
       }
     }
-  }
 
-  dialog.onShowing = _ => {
-    val owner = Main.stage
-    dialog.x = owner.x() + (owner.width() - 500) / 2
-    dialog.y = owner.y() + (owner.height() - 300) / 2
+    dialog.onShowing = _ => {
+      val owner = Main.stage
+      dialog.x = owner.x() + (owner.width() - 500) / 2
+      dialog.y = owner.y() + (owner.height() - 300) / 2
+    }
+    dialog.showAndWait()
   }
-  dialog.showAndWait()
-}
 
   def cardGrid(myHGap: Double = 10, myVGap: Double = 10)(
       init: GridPane => Unit
@@ -147,4 +157,26 @@ object UIComponents {
 
       init(this)
     }
+
+  def backButton(onClick: => Unit): Button = {
+    val btn = new Button("←") {
+      style = """
+        -fx-background-color: #e0e0e0;
+        -fx-text-fill: #333;
+        -fx-border-color: #999;
+        -fx-font-size: 20px;
+        -fx-font-weight: bold;
+        -fx-cursor: hand;
+        -fx-background-radius: 0;
+        -fx-border-radius: 0;
+    """
+      onAction() = _ => onClick
+
+      onMouseEntered = _ =>
+        style = style.value + "-fx-background-color: #cccccc;"
+      onMouseExited = _ =>
+        style = style.value + "-fx-background-color: #e0e0e0;"
+    }
+    btn
+  }
 }
