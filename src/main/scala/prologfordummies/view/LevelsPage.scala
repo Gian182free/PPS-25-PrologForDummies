@@ -31,7 +31,6 @@ object LevelsPage {
         text = "←",
         bgColor = "#white",
         textColor = "#333",
-        // TODO: reindirizzare al menu
         LevelsController.handleBackToMenu()
       )
     }
@@ -96,6 +95,7 @@ private def levelTile(title: String, questionsCount: Int, onInizia: => Unit): Re
 
   val startLvlBtn = styledButton("Inizia ▷", "#ffffff", "#333", onInizia)
   startLvlBtn.style = startLvlBtn.style.value + "-fx-border-color: #333; -fx-border-radius: 5;"
+  startLvlBtn.maxWidth() = 200
 
   add(titleLabel, 0, 0)
   add(infoLabel, 0, 1)

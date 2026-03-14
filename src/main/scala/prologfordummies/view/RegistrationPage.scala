@@ -66,7 +66,7 @@ object RegistrationPage {
         hgap = 10
         vgap = 15
         
-        val userLabel = new Label("Nome Utente") {
+        val userLabel = new Label("Username:") {
           font = Font.font("System", 18)
         }
 
@@ -74,6 +74,8 @@ object RegistrationPage {
           promptText = "User"
           prefWidth = 300
         }
+
+        userField.maxWidth() = 200
 
         val stateLabel = new Label("") {
           style = "-fx-text-fill: #d32f2f; -fx-font-style: italic;"
@@ -107,7 +109,7 @@ object RegistrationPage {
             )
           }
         )
-        registerBtn.prefWidth = 200
+        registerBtn.maxWidth() = 200
 
         add(userLabel, 0, 0)
         add(userField, 1, 0)
@@ -115,7 +117,6 @@ object RegistrationPage {
         GridPane.setHalignment(stateLabel, scalafx.geometry.HPos.Center)
         add(registerBtn, 0, 2, 2, 1)
         GridPane.setHalignment(registerBtn, scalafx.geometry.HPos.Center)
-        GridPane.setMargin(registerBtn, Insets(20, 0, 0, 0))
         
         val inputName = userField.text.value.trim
       }
