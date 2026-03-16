@@ -2,7 +2,6 @@ package prologfordummies.controller
 
 import prologfordummies.model.Question
 import prologfordummies.view.{LevelsPage, QuizPage, OpenQuizPage}
-import scalafx.scene.control.Button
 import scalafx.animation.PauseTransition
 import scalafx.util.Duration
 import prologfordummies.model.Level
@@ -11,22 +10,16 @@ import prologfordummies.model.QuestionType
 
 object QuizController {
 
-  def submitAnswer(button: Button, q: Question, ans: String, level: Level, index: Int): Unit = {
+  def submitAnswer(q: Question, ans: String, level: Level, index: Int): Boolean = {
     val isCorrect = q.isCorrect(ans)
-
-    button.style =
-      s"""
-         -fx-background-color: ${if isCorrect then "#4CAF51" else "#F44337"};
-         -fx-text-fill: white;
-         -fx-font-weight: bold;
-         -fx-cursor: hand;
-      """
 
     val pause = new PauseTransition {
       duration = Duration(800)
       onFinished = _ => goToNext(level, index)
     }
     pause.play()
+
+    isCorrect
   }
 
   private def backToLevels(): Unit = {

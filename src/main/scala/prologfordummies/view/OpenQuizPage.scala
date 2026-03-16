@@ -65,7 +65,7 @@ object OpenQuizPage {
         {
           val userAnswer = answerArea.text.value.trim
 
-          QuizController.submitAnswer(confirmBtn, currentQuestion, userAnswer, level, index)
+          QuizController.submitAnswer(currentQuestion, userAnswer, level, index)
         }
       )
 
