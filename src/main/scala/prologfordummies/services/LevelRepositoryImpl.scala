@@ -3,7 +3,7 @@ package prologfordummies.services
 import java.nio.file.{Files, Paths, Path}
 import java.util.UUID
 import upickle.default.*
-import prologfordummies.model.LevelCodec.given
+import prologfordummies.model.codec.LevelCodec.given
 import prologfordummies.model.Level
 
 /** Implementazione concreta di LevelRepository che utilizza un file JSON per la

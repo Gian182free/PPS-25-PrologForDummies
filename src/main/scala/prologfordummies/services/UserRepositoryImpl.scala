@@ -4,7 +4,7 @@ import prologfordummies.model.User
 import java.nio.file.{Files, Paths, Path}
 import java.util.UUID
 import upickle.default.*
-import prologfordummies.model.UserCodec.given
+import prologfordummies.model.codec.UserCodec.given
 
 /** Implementazione concreta di UserRepository che utilizza un file JSON per la
   * persistenza dei dati utente.

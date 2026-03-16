@@ -1,8 +1,11 @@
-package prologfordummies.model
+package prologfordummies.model.codec
 
 import upickle.default.*
 import java.time.LocalDateTime
 import java.util.UUID
+import prologfordummies.model.Level
+import prologfordummies.model.Question
+import prologfordummies.model.QuestionType
 
 /** Questo oggetto definisce le istanze implicite di ReadWriter utilizzate da
   * uPickle per convertire Level da/e verso JSON.
