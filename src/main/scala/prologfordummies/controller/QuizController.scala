@@ -10,6 +10,10 @@ import prologfordummies.view.UIComponents.showCustomConfirm
 import prologfordummies.model.QuestionType
 import prologfordummies.model.LevelSession
 import scalafx.application.Platform
+import prologfordummies.model.UserSession
+import prologfordummies.model.LevelRecord
+import prologfordummies.services.UserProgressRepositoryImpl
+import prologfordummies.model.UserProgress
 object QuizController {
 
   def submitAnswer(q: Question, ans: String, level: Level, index: Int): Boolean = {
@@ -46,14 +50,40 @@ object QuizController {
     val nextIndex = currentIndex + 1
     level.questions.lift(nextIndex).map(_ => nextIndex)
 
-  private def showEndedModal(): Unit = {
-
+  private def saveProgress(level: Level): ((Int, Int), String, String) = {
     val stats = LevelSession.currentStats.getOrElse((0, 0))
-    val minutes = LevelSession.elapsedMinutes == 1 match
-      case true => "1 Minuto"
-      case false => LevelSession.elapsedMinutes.toString + " Minuti"
+    val elapsed = LevelSession.elapsedMinutes
 
+    val minutesStr = if elapsed == 1 then "1 Minuto" else s"$elapsed Minuti"
     val percentage = if stats._1 > 0 then (stats._2.toDouble / stats._1 * 100).formatted("%.0f") else "0"
+
+    UserSession.currentSessionUser.foreach { user =>
+    val repository = UserProgressRepositoryImpl.fileRepository
+
+    // Recupero il progress se esiste
+    val currentProgress = repository.findByUserId(user.id)
+      .getOrElse(UserProgress(user.id, List.empty))
+
+    val newRecord = LevelRecord(
+      levelId = level.id,
+      completedAt = java.time.LocalDateTime.now(),
+      quizAttempts = stats._1,
+      quizCorrects = stats._2,
+      timeSpentMinutes = elapsed
+    )
+
+    val updatedProgress = currentProgress.copy(
+      history = currentProgress.history :+ newRecord
+    )
+
+    repository.saveProgress(updatedProgress)
+  }
+    (stats, minutesStr, percentage)
+  }
+
+  private def showEndedModal(level: Level): Unit = {
+
+    val (stats, minutes, percentage) = saveProgress(level)
 
     val finalData = LevelSession.endLevel()
 
@@ -74,7 +104,7 @@ object QuizController {
   private def goToNext(level: Level, currentIndex: Int): Unit =
     nextQuestion(level, currentIndex) match
       case Some(i) => loadQuestionPage(level, i)
-      case None => showEndedModal()
+      case None => showEndedModal(level)
 
   def loadQuestionPage(level: Level, index: Int): Unit =
     val q = level.questions(index)

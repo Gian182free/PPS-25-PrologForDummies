@@ -1,8 +1,9 @@
-package prologfordummies.model
+package prologfordummies.model.codec
 
 import upickle.default.*
 import java.time.LocalDateTime
 import java.util.UUID
+import prologfordummies.model.User
 
 /** Questo oggetto definisce le istanze implicite di ReadWriter utilizzate da
   * uPickle per convertire User da/e verso JSON.

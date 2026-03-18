@@ -3,7 +3,7 @@ package prologfordummies.services
 import prologfordummies.model.User
 import java.time.LocalDateTime
 import java.nio.file.{Files, Paths}
-import prologfordummies.model.UserCodec.given
+import prologfordummies.model.codec.UserCodec.given
 import upickle.default.*
 import java.time.LocalDateTime
 import java.util.UUID

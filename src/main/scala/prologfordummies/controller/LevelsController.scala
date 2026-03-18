@@ -22,7 +22,6 @@ object LevelsController {
       case Some(level) => onSuccess(level)
       case None        => onError(s"Livello con ID $idLevel non trovato")
     }
-    // Main.setPage(prologfordummies.view.QuizPage.asParent(level))
   }
 
   def handleBackToMenu(): Unit = {

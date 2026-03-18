@@ -5,7 +5,7 @@ import org.scalatest.BeforeAndAfterAll
 import java.nio.file.{Files, Paths}
 import java.util.UUID
 import prologfordummies.model.Level
-import prologfordummies.model.LevelCodec.given
+import prologfordummies.model.codec.LevelCodec.given
 import upickle.default.*
 import prologfordummies.model.Question
 
