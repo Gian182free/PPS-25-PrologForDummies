@@ -1,3 +1,9 @@
+---
+layout: default
+title: Requisiti
+parent: Introduzione
+nav_order: 2
+---
 
 # Requisiti
 
