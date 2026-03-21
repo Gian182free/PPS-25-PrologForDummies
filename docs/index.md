@@ -21,3 +21,8 @@ Per consolidare l’apprendimento, il sistema propone **quiz a risposta multipla
 - **Didattica interattiva:** quiz mirati con correzione automatica e istantanea.
 - **Dashboard dei progressi:** monitoraggio continuo del percorso con statistiche su livelli completati, punteggi e percentuale di avanzamento.
 
+---
+<div style="display: flex; justify-content: space-between; margin-top: 50px;">
+  <a href="requisiti.md">Avanti: Requisiti →</a>
+</div>
+
