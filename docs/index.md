@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Prolog for Dummies
+nav_order: 1
 ---
 
 <p align="center">
