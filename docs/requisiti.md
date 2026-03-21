@@ -100,6 +100,6 @@ Gli elementi principali del sistema sono:
 ---
 
 <div style="display: flex; justify-content: space-between; margin-top: 50px;">
-  <a href="index.md">← Indietro: Introduzione</a>
-  <a href="sprint1.md">Prossimo: Sprint 1 →</a>
+  <a href="index.html">← Indietro: Introduzione</a>
+  <a href="sprint1.html">Prossimo: Sprint 1 →</a>
 </div>
