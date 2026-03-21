@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Requisiti
-parent: Introduzione
 nav_order: 2
 ---
 
@@ -97,3 +96,10 @@ Gli elementi principali del sistema sono:
 
 - **Playground Prolog** per la scrittura ed esecuzione di query.
 - **Modalità di gioco “sopravvivenza”**, in cui l’utente risponde a una sequenza casuale di domande che termina al primo errore.
+
+---
+
+<div style="display: flex; justify-content: space-between; margin-top: 50px;">
+  <a href="index.md">← Indietro: Introduzione</a>
+  <a href="sprint1.md">Prossimo: Sprint 1 →</a>
+</div>
