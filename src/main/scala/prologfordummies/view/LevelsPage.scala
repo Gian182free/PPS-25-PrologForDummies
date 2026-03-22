@@ -14,12 +14,6 @@ object LevelsPage {
 
   private val levels: List[Level] = LevelsController.loadLevels()
 
-  private val currentUserProgress =
-    prologfordummies.model.UserSession.currentSessionUser.flatMap { user =>
-      prologfordummies.services.UserProgressRepositoryImpl.fileRepository
-        .findByUserId(user.id)
-    }
-
   def asParent: Region = new VBox {
     alignment = Pos.TopCenter
     spacing = 0
@@ -54,11 +48,10 @@ object LevelsPage {
 
     val levelsContainer = new VBox {
       children = levels.map { lvl =>
-        val completed = currentUserProgress.exists(_.history.exists(_.levelId == lvl.id))
         levelTile(
           lvl.title.asString, 
           lvl.questions.size,
-          completed,
+          LevelsController.isLevelCompleted(lvl),
           LevelsController.loadLevel(lvl)
         )
       }
