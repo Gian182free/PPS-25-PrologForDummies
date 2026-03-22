@@ -1,3 +1,17 @@
-theme: jekyll-theme-cayman
-title: Prolog for Dummies
-description: Learning Prolog made simple
+title: "Prolog for Dummies"
+description: "Learning Prolog made simple"
+remote_theme: just-the-docs/just-the-docs
+
+baseurl: "/PPS-25-PrologForDummies" 
+url: "https://gian182free.github.io"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+search_enabled: false
+aux_links:
+  "GitHub Repository":
+    - https://github.com/Gian182free/PPS-25-PrologForDummies
+
+color_scheme: dark
