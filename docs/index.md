@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 <p align="center">
-  <img src="resources/logo_pfd.png" alt="Prolog for Dummies Logo" width="420">
+  <img src="resources/logo_pfd_slim.png" alt="Prolog for Dummies Logo" width="420">
 </p>
 
 # Introduzione
@@ -25,5 +25,5 @@ Per consolidare l’apprendimento, il sistema propone **quiz a risposta multipla
 
 <p align="right">
   <a href="requisiti.html"> Avanti →</a>
-</p>>
+</p>
 
