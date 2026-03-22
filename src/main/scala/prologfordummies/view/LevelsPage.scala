@@ -1,13 +1,10 @@
 package prologfordummies.view
 
-import prologfordummies.controller
-import prologfordummies.view.UIComponents.{logoView, styledButton, backButton}
+import prologfordummies.view.UIComponents.{styledButton, backButton}
 import scalafx.geometry.{HPos, Insets, Pos}
-import scalafx.scene.control.{Label, TextField}
+import scalafx.scene.control.Label
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
 import scalafx.scene.text.Font
-import scalafx.scene.control.Separator
-import scalafx.geometry.Orientation
 import prologfordummies.model.Level
 import prologfordummies.controller.LevelsController
 import scalafx.scene.layout.HBox
@@ -16,6 +13,12 @@ import scalafx.scene.layout.HBox
 object LevelsPage {
 
   private val levels: List[Level] = LevelsController.loadLevels()
+
+  private val currentUserProgress =
+    prologfordummies.model.UserSession.currentSessionUser.flatMap { user =>
+      prologfordummies.services.UserProgressRepositoryImpl.fileRepository
+        .findByUserId(user.id)
+    }
 
   def asParent: Region = new VBox {
     alignment = Pos.TopCenter
@@ -51,9 +54,11 @@ object LevelsPage {
 
     val levelsContainer = new VBox {
       children = levels.map { lvl =>
+        val completed = currentUserProgress.exists(_.history.exists(_.levelId == lvl.id))
         levelTile(
           lvl.title.asString, 
-          lvl.questions.size, 
+          lvl.questions.size,
+          completed,
           LevelsController.loadLevel(lvl)
         )
       }
@@ -71,7 +76,7 @@ object LevelsPage {
   }
 }
 
-private def levelTile(title: String, questionsCount: Int, onInizia: => Unit): Region = new GridPane {
+private def levelTile(title: String, questionsCount: Int, completed: Boolean, onInizia: => Unit): Region = new GridPane {
   padding = Insets(15)
   hgap = 20
   vgap = 5
@@ -93,11 +98,18 @@ private def levelTile(title: String, questionsCount: Int, onInizia: => Unit): Re
     style = "-fx-text-fill: #666;"
   }
 
+  val statusLabel = new Label(if (completed) "Completato" else "Non completato") {
+    style =
+      if (completed) "-fx-text-fill: #2e7d31; -fx-font-weight: bold;"
+      else "-fx-text-fill: #b71c1c;"
+  }
+
   val startLvlBtn = styledButton("Inizia ▷", "#ffffff", "#333", onInizia)
   startLvlBtn.style = startLvlBtn.style.value + "-fx-border-color: #333; -fx-border-radius: 5;"
   startLvlBtn.maxWidth() = 200
 
   add(titleLabel, 0, 0)
   add(infoLabel, 0, 1)
-  add(startLvlBtn, 1, 0, 1, 2)
+  add(statusLabel, 0, 2)
+  add(startLvlBtn, 1, 0, 1, 3)
 }
