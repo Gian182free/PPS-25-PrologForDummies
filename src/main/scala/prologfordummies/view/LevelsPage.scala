@@ -51,6 +51,7 @@ object LevelsPage {
         levelTile(
           lvl.title.asString, 
           lvl.questions.size,
+          LevelsController.countCorrectAnswers(lvl),
           LevelsController.isLevelCompleted(lvl),
           LevelsController.loadLevel(lvl)
         )
@@ -69,7 +70,7 @@ object LevelsPage {
   }
 }
 
-private def levelTile(title: String, questionsCount: Int, completed: Boolean, onInizia: => Unit): Region = new GridPane {
+private def levelTile(title: String, questionsCount: Int, correctAnswers: Int, completed: Boolean, onInizia: => Unit): Region = new GridPane {
   padding = Insets(15)
   hgap = 20
   vgap = 5
@@ -97,12 +98,15 @@ private def levelTile(title: String, questionsCount: Int, completed: Boolean, on
       else "-fx-text-fill: #b71c1c;"
   }
 
+  val completedLabel = new Label(s"$correctAnswers risposte corrette su $questionsCount")
+
   val startLvlBtn = styledButton("Inizia ▷", "#ffffff", "#333", onInizia)
   startLvlBtn.style = startLvlBtn.style.value + "-fx-border-color: #333; -fx-border-radius: 5;"
   startLvlBtn.maxWidth() = 200
 
   add(titleLabel, 0, 0)
   add(infoLabel, 0, 1)
+  add(completedLabel, 1, 1)
   add(statusLabel, 0, 2)
-  add(startLvlBtn, 1, 0, 1, 3)
+  add(startLvlBtn, 2, 0, 1, 3)
 }

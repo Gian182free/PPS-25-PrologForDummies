@@ -40,4 +40,13 @@ object LevelsController {
     UserSession.currentSessionUser.flatMap { user =>
       progressRepo.findByUserId(user.id)
     }.exists(_.history.exists(_.levelId == level.id))
+
+  def countCorrectAnswers(level: Level): Int =
+    UserSession.currentSessionUser.flatMap { user =>
+      progressRepo.findByUserId(user.id)
+    }.map { _.history
+      .filter(_.levelId == level.id)
+      .map(_.quizCorrects)
+      .maxOption.getOrElse(0)
+    }.getOrElse(0)
 }
