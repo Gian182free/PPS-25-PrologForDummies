@@ -99,8 +99,3 @@ Gli elementi principali del sistema sono:
 
 ---
 
----
-<div class="w-screen flex justify-between px-4 mt-6 text-sm opacity-70">
-  <a href="index.html">← Introduzione</a>
-  <a href="sprint1.html">Sprint 1 →</a>
-</div>
