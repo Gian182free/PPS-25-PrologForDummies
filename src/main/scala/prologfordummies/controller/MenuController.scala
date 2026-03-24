@@ -1,7 +1,7 @@
 package prologfordummies.controller
 
 import prologfordummies.view.UIComponents.showCustomConfirm
-import prologfordummies.view.{EditUserPage, LevelsPage, LoginPage}
+import prologfordummies.view.{EditUserPage, LevelsPage, LoginPage, StatsPage}
 
 object MenuController {
 
@@ -10,7 +10,7 @@ object MenuController {
   }
 
   def goToStats(): Unit = {
-    println("Statistiche")
+    prologfordummies.Main.setPage(StatsPage.asParent)
   }
 
   def goToEditUser(): Unit = {
