@@ -1,3 +1,9 @@
+---
+layout: default
+title: Design Architetturale
+nav_order: 4
+---
+
 #  Design Architetturale
 
 ---

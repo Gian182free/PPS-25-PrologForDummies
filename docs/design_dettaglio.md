@@ -1,3 +1,9 @@
+---
+layout: default
+title: Design di Dettaglio
+nav_order: 5
+---
+
 #  Design di Dettaglio
 
 ---

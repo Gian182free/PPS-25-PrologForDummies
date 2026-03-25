@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Prolog for Dummies
+title: Introduzione
 nav_order: 1
 ---
 

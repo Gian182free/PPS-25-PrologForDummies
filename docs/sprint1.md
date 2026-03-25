@@ -1,3 +1,9 @@
+---
+layout: default
+title: Sprint 1
+nav_order: 10
+---
+
 # Sprint Planning 1
 **Periodo:** 01/02/2026 – 11/02/2026  
 
