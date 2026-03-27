@@ -99,3 +99,9 @@ Gli elementi principali del sistema sono:
 
 ---
 
+---
+
+<p align="right">
+  <a href="design_architetturale.html"> Design Architetturale →</a>
+</p>
+
