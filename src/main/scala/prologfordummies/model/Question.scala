@@ -15,7 +15,7 @@ case class Question(
   def isCorrect(answer: String, theory: String = ""): Boolean =
     qType match
       case QuestionType.MultipleChoice =>
-        answer == correctAnswer
+        PrologGrader.validateMultipleChoice(theory, answer, correctAnswer)
       case QuestionType.OpenQuestion =>
         validationQuery match
           case Some(query) => PrologGrader.validate(theory, answer, query)

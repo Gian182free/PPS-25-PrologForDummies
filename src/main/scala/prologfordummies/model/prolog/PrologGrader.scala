@@ -37,3 +37,24 @@ object PrologGrader:
           s"DEBUG - Errore durante la validazione Prolog: ${error.getMessage}"
         )
         false
+
+  def validateMultipleChoice(
+                              levelKnowledge: String,
+                              userAnswer: String,
+                              correctAnswer: String
+                            ): Boolean =
+    try
+      val normalizedUser = userAnswer.trim
+      val normalizedCorrect = correctAnswer.trim
+
+      // Verifica che entrambe siano codice Prolog corretto
+      val userTheory = new Theory(levelKnowledge + "\n" + normalizedUser)
+      val correctTheory = new Theory(levelKnowledge + "\n" + normalizedCorrect)
+
+      normalizedUser == normalizedCorrect
+    catch
+      case error: Exception =>
+        println(
+          s"DEBUG - Errore durante la validazione MultipleChoice: ${error.getMessage}"
+        )
+        false
