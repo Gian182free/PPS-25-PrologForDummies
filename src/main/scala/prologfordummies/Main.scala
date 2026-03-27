@@ -23,16 +23,7 @@ object Main extends JFXApp3 {
     }
   }
 
-  override def start(): Unit = {
-    val repo = UserRepositoryImpl.fileRepository
-    val testUser = repo.loadAll().headOption
-    UserSession.login(testUser.getOrElse(
-      User(
-        id = User.Id(UUID.fromString("78487944-0f3a-4eb3-bcaf-e4d58b45b442")),
-        username = User.Name("NoUserFound"),
-        registrationDate = LocalDateTime.parse("2026-02-25T23:00:56.638427600")
-      )
-    ))
+  override def start(): Unit = { 
     stage = new JFXApp3.PrimaryStage {
       title = "Prolog For Dummies"
       width = 800
