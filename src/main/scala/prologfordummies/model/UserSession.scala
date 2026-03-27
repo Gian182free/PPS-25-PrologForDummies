@@ -9,6 +9,10 @@ sealed trait UserSessionState
 case object Guest extends UserSessionState
 case class Authenticated(user: User) extends UserSessionState
 
+/** Gestisce lo stato della sessione utente corrente all'interno
+  * dell'applicazione. Funge da punto di accesso per verificare
+  * l'autenticazione e recuperare i dati dell'utente attivo.
+  */
 object UserSession:
 
   private var currentUser: UserSessionState = Guest
