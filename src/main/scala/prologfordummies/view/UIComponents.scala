@@ -57,9 +57,21 @@ object UIComponents {
       onAction() = _ => onClick
     }
 
-  /*
-   * Modale con titolo, messaggio e testo dei bottoni customizzabile.
-   */
+  /** Visualizza una finestra di dialogo modale personalizzata per confermare o
+    * annullare un'azione
+    *
+    * @param head
+    *   Il titolo della modale
+    * @param message
+    *   La descrizione del messaggio
+    * @param confirmButtonMsg
+    *   Testo del pulsante di conferma
+    * @param declinedButtonMsg
+    *   Testo del pulsante di annullamento
+    * @param onConfirm
+    *   Funzione callback eseguita solo se l'utente preme il pulsante di
+    *   conferma
+    */
   def showCustomConfirm(
       head: String,
       message: String,

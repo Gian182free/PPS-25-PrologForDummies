@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Prolog for Dummies
+title: Introduzione
 nav_order: 1
 ---
 
@@ -24,6 +24,6 @@ Per consolidare l’apprendimento, il sistema propone **quiz a risposta multipla
 ---
 
 <p align="right">
-  <a href="requisiti.html"> Avanti →</a>
+  <a href="processo_di_sviluppo.html"> Processo di sviluppo →</a>
 </p>
 

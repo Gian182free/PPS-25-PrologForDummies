@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Kickoff Meeting
+nav_order: 9
 ---
+
 
 # Kickoff Meeting (31/01/2026)
 

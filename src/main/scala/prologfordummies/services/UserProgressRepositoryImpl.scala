@@ -7,6 +7,9 @@ import prologfordummies.model.UserProgress.given
 import prologfordummies.model.LevelRecord.given
 import prologfordummies.model.codec.UserProgressCodec.given
 
+/** Implementazione concreta di UserProgress che utilizza un file JSON per la
+*   persistenza dei dati dei livelli.
+*/
 class UserProgressRepositoryImpl(storagePath: Path)
     extends UserProgressRepository {
 

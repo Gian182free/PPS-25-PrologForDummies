@@ -1,3 +1,9 @@
+---
+layout: default
+title: Sprint 3
+nav_order: 12
+---
+
 # Sprint Planning 3
 **Periodo:** 23/02/2026 – 04/03/2026
 
