@@ -1,9 +1,9 @@
 package prologfordummies.model
 
 import org.scalatest.funsuite.AnyFunSuite
-import prologfordummies.model.prolog.PrologGrader
 import prologfordummies.model.QuestionType
 import prologfordummies.model.Question
+import prologfordummies.services.prolog.PrologGrader
 
 object QuestionOpenPrologTest extends AnyFunSuite {
 

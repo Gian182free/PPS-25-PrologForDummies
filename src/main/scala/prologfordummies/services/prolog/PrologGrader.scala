@@ -1,4 +1,4 @@
-package prologfordummies.model.prolog
+package prologfordummies.services.prolog
 
 import alice.tuprolog.*
 

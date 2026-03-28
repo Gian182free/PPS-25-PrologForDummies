@@ -1,7 +1,7 @@
 package prologfordummies.model
 
 import prologfordummies.model.QuestionType
-import prologfordummies.model.prolog.PrologGrader
+import prologfordummies.services.prolog.PrologGrader
 
 case class Question(
   id: Int,
