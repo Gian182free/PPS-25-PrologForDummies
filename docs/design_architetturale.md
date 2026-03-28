@@ -27,7 +27,7 @@ Il sistema adotta un pattern Model-View-Controller (MVC) esteso con uno strato d
 Questa struttura a strati permette di evolvere il sistema senza impattare sull'interfaccia utente o sul flusso di controllo.
 
 <p align="center">
-  <img src="resources/uml-schema-gen.png" alt="uml-schema">
+  <img src="resources/uml-schema-gen.svg" alt="uml-schema">
 </p>
 
 ### Model
