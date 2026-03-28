@@ -3,7 +3,7 @@ val scala3Version = "3.8.1"
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "Scala 3 Project Template",
+    name := "PfD - Prolog for Dummies",
     version := "0.1.0-SNAPSHOT",
     scalaVersion := scala3Version,
 
@@ -20,3 +20,8 @@ lazy val root = project
       case _                        => MergeStrategy.first
     }
   )
+
+Compile / doc / scalacOptions ++= Seq(
+  "-doc-title", "Prolog For Dummies",
+  "-doc-footer", "Prolog For Dummies"
+)
