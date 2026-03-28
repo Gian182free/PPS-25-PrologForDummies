@@ -5,6 +5,8 @@ import prologfordummies.services.{LevelRepositoryImpl, UserProgressRepositoryImp
 
 import java.util.UUID
 import prologfordummies.Main
+
+/** Gestisce il caricamento dei livelli. */
 object LevelsController {
 
   private given repo: prologfordummies.services.LevelRepository =

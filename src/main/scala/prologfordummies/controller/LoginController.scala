@@ -4,13 +4,16 @@ import prologfordummies.model.{User, UserSession}
 import prologfordummies.services.UserRepositoryImpl
 import prologfordummies.view.{MenuPage, RegistrationPage}
 
+/** Gestisce il login dell'utente
+ * e la navigazione alle pagine di registrazione e menu.
+ */
 object LoginController {
 
   trait LoginResult
   case class Success(user: User) extends LoginResult
   case class Error(message: String) extends LoginResult
 
-
+  /** Esegue il login cercando l'utente per username. */
   def login(username: String): LoginResult = {
     username match {
       case "" => Error("Inserire un nome utente")

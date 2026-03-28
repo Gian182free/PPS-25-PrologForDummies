@@ -8,6 +8,7 @@ import scalafx.scene.control.{Label, Separator}
 import scalafx.scene.layout.*
 import scalafx.scene.text.Font
 
+/** Schermata principale dopo il login per accedere alle sezioni dell'app. */
 object MenuPage {
 
   def currentUserName: String =

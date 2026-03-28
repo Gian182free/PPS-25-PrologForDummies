@@ -9,7 +9,7 @@ import prologfordummies.model.Level
 import prologfordummies.controller.LevelsController
 import scalafx.scene.layout.HBox
 
-
+/** Schermata di selezione dei livelli disponibili. */
 object LevelsPage {
 
   private val levels: List[Level] = LevelsController.loadLevels()

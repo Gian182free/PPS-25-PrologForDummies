@@ -7,6 +7,7 @@ import scalafx.scene.control.Label
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
 import scalafx.scene.text.Font
 
+/** Schermata con le statistiche dell'utente corrente. */
 object StatsPage {
 
   def asParent: Region = new VBox {

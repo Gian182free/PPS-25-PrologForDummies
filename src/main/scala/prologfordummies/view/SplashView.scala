@@ -4,6 +4,7 @@ import scalafx.geometry.Pos
 import scalafx.scene.layout.{Region, VBox}
 import UIComponents._
 
+/** Schermata iniziale mostrata all'avvio dell'applicazione. */
 object SplashView {
   def asParent: Region = new VBox {
     alignment = Pos.Center

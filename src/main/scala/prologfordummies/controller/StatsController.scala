@@ -3,6 +3,8 @@ package prologfordummies.controller
 import prologfordummies.model.UserSession
 import prologfordummies.services.UserProgressRepositoryImpl
 
+/** Recupera le statistiche dell'utente corrente.
+ */
 object StatsController {
 
   private given progressRepo: prologfordummies.services.UserProgressRepository =

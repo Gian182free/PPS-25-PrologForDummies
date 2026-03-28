@@ -15,6 +15,7 @@ import scalafx.scene.text.Font
 import scalafx.geometry.Orientation
 import scalafx.scene.image.ImageView
 
+/** Schermata di login dell'applicazione. */
 object LoginPage {
 
   def asParent: Region = new VBox {

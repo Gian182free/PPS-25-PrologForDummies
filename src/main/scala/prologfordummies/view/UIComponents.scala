@@ -10,6 +10,8 @@ import prologfordummies.Main
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.stage.StageStyle
+
+/** Componenti UI riutilizzabili: layout, logo, pulsanti e dialoghi. */
 object UIComponents {
   private val defaultBg = "-fx-background-color: #f4f4f4;"
   private val cardStyle =

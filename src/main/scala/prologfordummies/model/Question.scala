@@ -3,6 +3,8 @@ package prologfordummies.model
 import prologfordummies.model.QuestionType
 import prologfordummies.services.prolog.PrologGrader
 
+/** Rappresenta una domanda del quiz.
+ */
 case class Question(
   id: Int,
   question: String,
@@ -12,6 +14,9 @@ case class Question(
   validationQuery: Option[String] = None
 ):
 
+  /** Verifica se la risposta fornita è corretta
+   *  passandola al motore Prolog.
+   */
   def isCorrect(answer: String, theory: String = ""): Boolean =
     qType match
       case QuestionType.MultipleChoice =>

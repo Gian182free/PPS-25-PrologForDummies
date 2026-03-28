@@ -2,7 +2,6 @@ package prologfordummies.controller
 
 import prologfordummies.model.Question
 import prologfordummies.view.{LevelsPage, QuizPage, OpenQuizPage}
-import scalafx.scene.control.Button
 import scalafx.animation.PauseTransition
 import scalafx.util.Duration
 import prologfordummies.model.Level
@@ -14,8 +13,17 @@ import prologfordummies.model.UserSession
 import prologfordummies.model.LevelRecord
 import prologfordummies.services.UserProgressRepositoryImpl
 import prologfordummies.model.UserProgress
+
+/** Gestisce l'interazione Utente-Quiz: risposta, avanzamento e salvataggio dei progressi. */
 object QuizController {
 
+  /** Valida la risposta e passa automaticamente alla domanda successiva. 
+   * @param q domanda corrente,
+   * @param ans risposta fornita dall'utente,
+   * @param level livello corrente,
+   * @param index indice della domanda corrente nel livello.
+   * @return Boolean 
+   */
   def submitAnswer(q: Question, ans: String, level: Level, index: Int): Boolean = {
     val isCorrect = q.isCorrect(ans)
 
@@ -50,6 +58,10 @@ object QuizController {
     val nextIndex = currentIndex + 1
     level.questions.lift(nextIndex).map(_ => nextIndex)
 
+  /** Salva i risultati finali del livello e prepara il riepilogo. 
+   * @param level livello corrente.
+   * @return (stats, minutesStr, percentage)
+   */
   private def saveProgress(level: Level): ((Int, Int), String, String) = {
     val stats = LevelSession.currentStats.getOrElse((0, 0))
     val elapsed = LevelSession.elapsedMinutes
@@ -106,6 +118,7 @@ object QuizController {
       case Some(i) => loadQuestionPage(level, i)
       case None => showEndedModal(level)
 
+  /** Carica la vista corretta per il tipo di domanda. */
   def loadQuestionPage(level: Level, index: Int): Unit =
     val q = level.questions(index)
 

@@ -3,6 +3,9 @@ package prologfordummies.controller
 import prologfordummies.view.UIComponents.showCustomConfirm
 import prologfordummies.view.{EditUserPage, LevelsPage, LoginPage, StatsPage}
 
+/** Gestisce la pagina principale dell'applicazione
+ * (effettuato il login)
+ */
 object MenuController {
 
   def goToLevels(): Unit = {

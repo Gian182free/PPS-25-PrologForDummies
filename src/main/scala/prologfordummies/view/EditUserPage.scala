@@ -1,22 +1,17 @@
 package prologfordummies.view
 
 import scalafx.geometry.{Insets, Pos}
-import scalafx.scene.control.{Button, Label, TextField}
-import scalafx.scene.image.{Image, ImageView}
+import scalafx.scene.control.{Label, TextField}
 import prologfordummies.view.UIComponents.{logoView, styledButton, showCustomConfirm, backButton}
 import scalafx.scene.layout._
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, VBox, Region}
 import scalafx.scene.text.Font
 import scalafx.scene.control.Separator
-import prologfordummies.Main
 import scalafx.geometry.Orientation
 import prologfordummies.model.UserSession
 import prologfordummies.controller.EditUserController
 import scalafx.animation.PauseTransition
 import prologfordummies.model.User
-import scalafx.scene.control.Alert
-import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.ButtonType
 
 object EditUserPage {
   

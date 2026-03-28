@@ -8,6 +8,7 @@ import scalafx.scene.control.{Button, Label, TextArea}
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, Region, VBox}
 import scalafx.scene.text.Font
 
+/** Schermata del quiz a risposta multipla. */
 object QuizPage {
 
   private def answerStyle(isCorrect: Boolean): String =

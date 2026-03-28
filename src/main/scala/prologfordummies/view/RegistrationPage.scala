@@ -6,7 +6,6 @@ import prologfordummies.view.UIComponents.{logoView, styledButton, backButton}
 import scalafx.scene.layout._
 import scalafx.scene.text.Font
 import prologfordummies.controller.RegistrationController
-import prologfordummies.Main
 import scalafx.animation.PauseTransition
 
 object RegistrationPage {
