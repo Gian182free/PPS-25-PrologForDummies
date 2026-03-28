@@ -7,13 +7,7 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.Region
 import scalafx.animation.PauseTransition
 import scalafx.util.Duration
-import prologfordummies.view.RegistrationPage
-import prologfordummies.view.EditUserPage
-import prologfordummies.model.User
-import java.util.UUID
-import java.time.LocalDateTime
-import prologfordummies.model.UserSession
-import prologfordummies.services.UserRepositoryImpl
+import scalafx.scene.image.Image
 
 object Main extends JFXApp3 {
 
@@ -26,6 +20,7 @@ object Main extends JFXApp3 {
   override def start(): Unit = { 
     stage = new JFXApp3.PrimaryStage {
       title = "Prolog For Dummies"
+      icons += new Image(getClass.getResourceAsStream("/logo_pfd.png"))
       width = 800
       height = 600
       maximized = true 
