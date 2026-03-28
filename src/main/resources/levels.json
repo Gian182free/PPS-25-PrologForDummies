@@ -1,0 +1,339 @@
+[
+  {
+    "id": "c49ef847-66f7-451a-bad9-ab44e009b669",
+    "title": "Atomi in Prolog",
+    "theory": "Un atomo in Prolog è un identificatore che inizia con una lettera minuscola, può contenere lettere, numeri e underscore. È la forma più semplice di dato. Anche stringhe tra apici singoli sono atomi validi.",
+    "createdAt": "2026-03-27T17:00:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di questi è un atomo Prolog valido?",
+        "correctAnswer": "cane.",
+        "answers": [
+          "Cane",
+          "cane.",
+          "cane()",
+          "123cane"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale di questi rappresenta correttamente un atomo composto?",
+        "correctAnswer": "casa_rossa.",
+        "answers": [
+          "Casa_rossa.",
+          "casa-rossa.",
+          "casa_rossa.",
+          "casa rossa"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale di questi è un atomo Prolog valido scritto come stringa?",
+        "correctAnswer": "'rosso'.",
+        "answers": [
+          "\"rosso\"",
+          "'Rosso'.",
+          "'rosso'.",
+          "rosso\""
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "f0c3cf4d-4c51-4d9a-b1af-1c2e65e57f47",
+    "title": "Fatti in Prolog",
+    "theory": "Un fatto in Prolog rappresenta una relazione sempre vera. La sintassi è predicato(argomento1, argomento2, ...). e termina sempre con un punto. I predicati iniziano con una lettera minuscola.",
+    "createdAt": "2026-03-27T17:30:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di questi è un fatto Prolog scritto correttamente?",
+        "correctAnswer": "colore(auto, rosso).",
+        "answers": [
+          "Colore(auto, rosso)",
+          "colore-auto-rosso.",
+          "colore(auto, rosso).",
+          "auto è rosso"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale rappresenta correttamente un fatto con due argomenti?",
+        "correctAnswer": "amico(mario, luigi).",
+        "answers": [
+          "amico(mario luigi).",
+          "Amico(mario, luigi).",
+          "amico(mario, luigi).",
+          "amico: mario -> luigi"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale di questi è un fatto che indica che anna è figlia di maria?",
+        "correctAnswer": "figlia(anna, maria).",
+        "answers": [
+          "figlia = (anna, maria).",
+          "Figlia(anna, maria).",
+          "figlia(anna, maria).",
+          "anna è figlia di maria"
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "b8dfd3c1-0bde-4a0f-a00a-3227eac2a3f6",
+    "title": "Regole in Prolog",
+    "theory": "Una regola in Prolog permette di definire una relazione che dipende da altre relazioni. La sintassi è: conclusione :- condizione1, condizione2, .... Le variabili iniziano con una lettera maiuscola e la regola termina sempre con un punto.",
+    "createdAt": "2026-03-27T17:45:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di queste è una regola Prolog valida?",
+        "correctAnswer": "nonno(X,Y) :- padre(X,Z), padre(Z,Y).",
+        "answers": [
+          "nonno(X,Y) = padre(X,Z), padre(Z,Y).",
+          "Nonno(X,Y) :- padre(X,Z), padre(Z,Y).",
+          "nonno(X,Y) :- padre(X,Z), padre(Z,Y).",
+          "nonno(X,Y) :: padre(X,Z), padre(Z,Y)."
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale regola stabilisce che X è felice se possiede un cane?",
+        "correctAnswer": "felice(X) :- possiede(X, cane).",
+        "answers": [
+          "felice(X) = possiede(X, cane).",
+          "felice(X) :- possiede X cane.",
+          "felice(X) :- possiede(X, cane).",
+          "felice X :- possiede(X, cane)"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale di queste è una regola corretta con tre condizioni?",
+        "correctAnswer": "adulto(X) :- eta(X, N), N >= 18, persona(X).",
+        "answers": [
+          "adulto(X) :- eta(X,N) N>=18 persona(X).",
+          "Adulto(X) :- eta(X, N), N >= 18, persona(X).",
+          "adulto(X) = eta(X, N), N >= 18, persona(X).",
+          "adulto(X) :- eta(X, N), N >= 18, persona(X)."
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "e5c3d1bc-7c40-4d7b-8d30-3fca2a5bdf10",
+    "title": "Query in Prolog",
+    "theory": "Le query in Prolog permettono di interrogare la base di conoscenza. Una query inizia con '?-' e termina con un punto. Prolog tenta di soddisfare gli obiettivi tramite unificazione e backtracking. Le variabili iniziano con lettera maiuscola e possono essere utilizzate per ottenere risultati.",
+    "createdAt": "2026-03-27T18:10:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di queste è una query Prolog valida che chiede chi è padre di luigi?",
+        "correctAnswer": "?- padre(X, luigi).",
+        "answers": [
+          "padre(X, luigi)?",
+          "?- padre(X, luigi).",
+          "?= padre(X, luigi)",
+          "Chi è padre di luigi?"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale query Prolog verifica se mario è genitore di anna?",
+        "correctAnswer": "?- genitore(mario, anna).",
+        "answers": [
+          "genitore(mario, anna)?",
+          "?- genitore(mario, anna).",
+          "?- genitore(mario anna).",
+          "genitore: mario -> anna"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale query restituisce tutti i figli di P?",
+        "correctAnswer": "?- figlio(X, P).",
+        "answers": [
+          "figlio(X, P).?",
+          "?- figlio(X P).",
+          "?= figlio(X, P).",
+          "?- figlio(X, P)."
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "9e5b82c7-0a8f-4d4a-9f49-dbc2b0cb50d4",
+    "title": "Liste in Prolog",
+    "theory": "Le liste in Prolog sono strutture fondamentali rappresentate con la sintassi [Elem1, Elem2, ...]. Possono essere decomposte tramite pattern matching usando l'operatore | come in [H|T], dove H è la testa e T la coda. Una lista vuota è rappresentata come [].",
+    "createdAt": "2026-03-28T23:22:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di questi è una lista Prolog scritta correttamente?",
+        "correctAnswer": "[a, b, c].",
+        "answers": [
+          "[a b c]",
+          "a, b, c",
+          "[a, b, c].",
+          "{a, b, c}"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale pattern decomprime correttamente una lista in testa e coda?",
+        "correctAnswer": "[H|T].",
+        "answers": [
+          "(H, T)",
+          "[H,T|]",
+          "[H|T].",
+          "H -> T"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale di questi rappresenta una lista contenente una singola lista come elemento?",
+        "correctAnswer": "[[a, b]].",
+        "answers": [
+          "[a, [b]]",
+          "[a, b]",
+          "[[a, b]].",
+          "[[a], b]"
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "4b91f6c5-c4a9-4d77-a9ec-5e2d7e63b9c3",
+    "title": "Ricorsione in Prolog",
+    "theory": "La ricorsione è una delle tecniche fondamentali in Prolog. Una definizione ricorsiva è composta da un caso base e uno o più casi ricorsivi. L'ordine delle clausole è importante: il caso base deve precedere il caso ricorsivo per evitare loop infiniti.",
+    "createdAt": "2026-03-28T23:28:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di questi è un caso base corretto per calcolare la lunghezza di una lista?",
+        "correctAnswer": "len([], 0).",
+        "answers": [
+          "len([], 0).",
+          "len([_|T], N) :- len(T, N).",
+          "len(T, N) :- N = N + 1.",
+          "length([], 0)"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale di queste clausole rappresenta correttamente il caso ricorsivo della lunghezza di una lista?",
+        "correctAnswer": "len([_|T], N) :- len(T, M), N is M + 1.",
+        "answers": [
+          "len([_|T], N) :- N is N + 1.",
+          "len([H|T], N) :- len(T), N is M + 1.",
+          "len([_|T], N) :- len(T, M), N is M + 1.",
+          "len(T|_, N) :- len(T, M+1)."
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale definizione calcola correttamente il fattoriale in Prolog?",
+        "correctAnswer": "fact(N, F) :- N > 0, N1 is N - 1, fact(N1, F1), F is N * F1.",
+        "answers": [
+          "fact(N, F) :- N1 = N - 1, F = N * fact(N1).",
+          "fact(N, F) :- N > 0, N1 is N - 1, fact(N1, F1), F is N * F1.",
+          "fact(N, F) :- F is N * fact(N - 1).",
+          "fact(N, F) :- N > 0, fact(N, F1), F is N * F1."
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "3f0f0a1e-5b0c-4d92-a6a1-5f09d8b00c44",
+    "title": "Aritmetica in Prolog",
+    "theory": "In Prolog le espressioni aritmetiche si valutano usando l'operatore 'is'. Le comparazioni numeriche utilizzano predicati dedicati come =:=, \\=, <, >, =<, >=. L'operatore 'is' valuta l'espressione a destra e assegna il risultato alla variabile a sinistra.",
+    "createdAt": "2026-03-28T23:35:00",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Quale di questi calcola correttamente la somma di 2 e 3 in Prolog?",
+        "correctAnswer": "X is 2 + 3.",
+        "answers": [
+          "X = 2 + 3.",
+          "X := 2 + 3.",
+          "X is 2 + 3.",
+          "X == 2 + 3."
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 2,
+        "question": "Quale confronto aritmetico Prolog verifica correttamente che 4 è uguale a 2+2?",
+        "correctAnswer": "4 =:= 2 + 2.",
+        "answers": [
+          "4 == 2 + 2.",
+          "4 = 2 + 2.",
+          "4 =:= 2 + 2.",
+          "4 is 2 + 2"
+        ],
+        "qType": "MultipleChoice"
+      },
+      {
+        "id": 3,
+        "question": "Quale di queste regole calcola correttamente il doppio di un numero N?",
+        "correctAnswer": "doppio(N, X) :- X is N * 2.",
+        "answers": [
+          "doppio(N, X) :- X = N * 2.",
+          "doppio(N, X) :- X := N * 2.",
+          "doppio(N, X) :- X is N * 2.",
+          "doppio(N, X) :- N is X * 2."
+        ],
+        "qType": "MultipleChoice"
+      }
+    ]
+  },
+  {
+    "id": "64389a8e-97b5-49ae-87d3-5f9a94812fd6",
+    "title": "Domande Aperte di Prolog",
+    "theory": "Rispondi in forma libera alle seguenti domande su Prolog. Presta attenzione alla sintassi (punti finali, minuscole/maiuscole, arità).",
+    "createdAt": "2026-03-13T18:33:43",
+    "questions": [
+      {
+        "id": 1001,
+        "question": "Scrivi un fatto Prolog che dica che mario è padre di luigi.",
+        "correctAnswer": "padre(mario, luigi).",
+        "answers": [],
+        "qType": "OpenQuestion"
+      },
+      {
+        "id": 1002,
+        "question": "Scrivi una regola Prolog 'nonno(X,Y)' che sia vera se X è padre di Z e Z è padre di Y.",
+        "correctAnswer": "nonno(X,Y) :- padre(X,Z), padre(Z,Y).",
+        "answers": [],
+        "qType": "OpenQuestion"
+      },
+      {
+        "id": 1003,
+        "question": "Dato il predicato 'capitale(Città, Stato).', istanzia un fatto che indichi Roma come capitale d'Italia.",
+        "correctAnswer": "capitale(roma, italia).",
+        "answers": [],
+        "qType": "OpenQuestion"
+      }
+    ]
+  }
+]

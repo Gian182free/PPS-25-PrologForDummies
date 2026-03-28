@@ -36,7 +36,7 @@ object LevelRepositoryImpl {
   private val userHome = System.getProperty("user.home")
   private val file = "levels.json"
   private val defaultPath =
-    Paths.get(userHome, ".prologfordummies", file)
+    Paths.get("src", "main", "resources", file)
 
   given fileRepository: LevelRepository = new LevelRepositoryImpl(defaultPath)
 }
