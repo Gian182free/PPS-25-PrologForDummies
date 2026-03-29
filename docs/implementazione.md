@@ -153,7 +153,7 @@ def validate(levelKnowledge: String, userSolution: String, testQuery: String): B
     prologEngine.solve(testQuery).isSuccess // La correttezza è determinata dal successo logico
   catch
     case _: Exception => false
-
+```
 
 ## View
 
@@ -198,6 +198,7 @@ def showCustomConfirm(head: String, message: String, onConfirm: () => Unit): Uni
   }
   dialog.showAndWait()
 }
+```
 
 <p align="right">
   <a href="testing.html"> Testing →</a>
