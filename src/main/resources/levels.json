@@ -40,6 +40,14 @@
           "rosso\""
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 101,
+        "question": "Scrivi un atomo Prolog che rappresenti la parola 'studente'.",
+        "correctAnswer": "studente.",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "studente == studente."
       }
     ]
   },
@@ -84,6 +92,14 @@
           "anna è figlia di maria"
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 201,
+        "question": "Scrivi un fatto Prolog che indichi che anna è sorella di maria.",
+        "correctAnswer": "sorella(anna, maria).",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "sorella(anna, maria)."
       }
     ]
   },
@@ -128,6 +144,14 @@
           "adulto(X) :- eta(X, N), N >= 18, persona(X)."
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 301,
+        "question": "Scrivi una regola Prolog che definisca genitore(X,Y) come vero se X è padre o madre di Y.",
+        "correctAnswer": "genitore(X,Y) :- padre(X,Y). genitore(X,Y) :- madre(X,Y).",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "genitore(mario, luigi)."
       }
     ]
   },
@@ -172,6 +196,14 @@
           "?- figlio(X, P)."
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 401,
+        "question": "Scrivi una query Prolog che chieda tutti i figli di anna.",
+        "correctAnswer": "?- figlio(X, anna).",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "figlio(X, anna)."
       }
     ]
   },
@@ -216,6 +248,14 @@
           "[[a], b]"
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 501,
+        "question": "Scrivi una lista Prolog contenente mario, luigi e anna.",
+        "correctAnswer": "[mario, luigi, anna].",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "member(luigi, [mario, luigi, anna])."
       }
     ]
   },
@@ -260,6 +300,14 @@
           "fact(N, F) :- N > 0, fact(N, F1), F is N * F1."
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 601,
+        "question": "Scrivi il caso base di una regola ricorsiva che calcola la lunghezza di una lista.",
+        "correctAnswer": "len([], 0).",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "len([], 0)."
       }
     ]
   },
@@ -304,6 +352,14 @@
           "doppio(N, X) :- N is X * 2."
         ],
         "qType": "MultipleChoice"
+      },
+      {
+        "id": 701,
+        "question": "Scrivi una query Prolog che calcoli il valore di 12 diviso 3 e lo unifichi alla variabile X.",
+        "correctAnswer": "X is 12 / 3.",
+        "answers": [],
+        "qType": "OpenQuestion",
+        "validationQuery": "X is 12 / 3, X =:= 4."
       }
     ]
   },

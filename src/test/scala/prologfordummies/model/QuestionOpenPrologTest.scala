@@ -5,7 +5,7 @@ import prologfordummies.model.QuestionType
 import prologfordummies.model.Question
 import prologfordummies.services.prolog.PrologGrader
 
-object QuestionOpenPrologTest extends AnyFunSuite {
+class QuestionOpenPrologTest extends AnyFunSuite {
 
   // Test per la valutazione di domande aperte con validazione Prolog
 
