@@ -26,6 +26,8 @@ Il sistema è composto da:
 - **Repository**: gestisce l’accesso ai dati su file JSON;
 - **Motore Prolog**: valuta le risposte degli esercizi basati su Prolog.
 
+
+
 ---
 
 ## Design del Model
@@ -43,6 +45,11 @@ Rappresenta un livello del percorso didattico. Ogni livello contiene:
 - una sequenza di domande a risposta multipla o aperte;
 - metadati utili alla navigazione e alla valutazione.
 
+#### Dettaglio del livello
+<p align="center">
+  <img src="resources/levels.svg" alt="uml-schema">
+</p>
+
 #### Question
 Rappresenta una singola domanda del quiz. Il modello supporta tipologie differenti, in particolare:
 - **MultipleChoice**
@@ -50,6 +57,12 @@ Rappresenta una singola domanda del quiz. Il modello supporta tipologie differen
 
 #### UserProgress
 Aggrega la cronologia dei progressi utente, registrando per ogni livello completato i relativi KPI e dati di sessione.
+
+#### Dettaglio di UserProgress
+
+<p align="center">
+  <img src="resources/userprogress.svg" alt="uml-schema">
+</p>
 
 #### LevelRecord
 Modella il completamento di un singolo livello, includendo i dati raccolti durante la sessione di gioco.
@@ -215,6 +228,11 @@ Il flusso applicativo segue una sequenza chiara:
 
 Questo flusso consente all’utente di muoversi in modo intuitivo nel percorso didattico.
 
+#### Dettaglio di sequenza del quiz
+
+<p align="center">
+  <img src="resources/QuizSequence.svg" alt="uml-schema">
+</p>
 ---
 
 ## Design della valutazione dei quiz
