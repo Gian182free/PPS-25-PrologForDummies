@@ -199,6 +199,127 @@ def showCustomConfirm(head: String, message: String, onConfirm: () => Unit): Uni
   dialog.showAndWait()
 }
 ```
+---
+
+## Francesco Agnoletti
+
+---
+
+## Model
+
+### **Question**
+Ho lavorato sull’evoluzione del modello `Question`, estendendolo per supportare in modo più flessibile le diverse tipologie di domanda presenti nel progetto.
+In particolare, la struttura della domanda è stata resa più robusta per gestire sia la validazione della risposta sia i casi in cui sia necessario un controllo più articolato tramite Prolog.
+
+```
+def isCorrect(answer: String, theory: String = ""): Boolean =
+    qType match
+        case QuestionType.MultipleChoice =>
+            PrologGrader.validateMultipleChoice(theory, answer, correctAnswer)
+        case QuestionType.OpenQuestion =>
+            validationQuery match
+                case Some(query) => PrologGrader.validate(theory, answer, query)
+                case None        => answer.trim == correctAnswer.trim
+```
+
+### **QuestionType**
+Ho introdotto e utilizzato il tipo `QuestionType` per distinguere chiaramente tra domande a risposta multipla e domande aperte.
+Questo ha permesso di rendere il flusso del quiz più chiaro, separando in modo esplicito le diverse logiche di visualizzazione e validazione.
+
+---
+
+## Controller
+
+### **LoginController**
+Ho contribuito alla gestione del login utente e della navigazione iniziale dell’applicazione.
+Il controller si occupa di validare l’input, recuperare l’utente autenticato e indirizzare correttamente l’utente verso il menu principale o verso la registrazione.
+
+### **MenuController**
+Il menu principale rappresenta il punto di accesso alle varie funzionalità dell’applicazione.
+Questo controller coordina la navigazione verso le schermate principali, mantenendo separata la logica di controllo dalla presentazione grafica.
+
+### **QuizController**
+Mi sono occupato della gestione del flusso del quiz, in particolare dell’avanzamento tra le domande, della validazione della risposta e del passaggio automatico alla schermata successiva.
+Ho lavorato anche sulla chiusura del livello e sul recupero dei dati necessari per mostrare il riepilogo finale, mantenendo centralizzata la logica applicativa nel controller.
+
+### **StatsController**
+Ho collaborato alla creazione del controller dedicato alle statistiche dell’utente corrente, così da recuperare in modo centralizzato i dati relativi ai progressi e ai risultati ottenuti nei livelli completati.
+Questo ha permesso di esporre in modo ordinato le informazioni utili alla schermata delle statistiche, senza distribuire la logica di calcolo nelle View.
+
+---
+
+## Services
+
+### **PrologGrader**
+Mi sono occupato dello spostamento e della sistemazione di `PrologGrader` nel package dei servizi, così da collocare correttamente la logica di valutazione nel livello applicativo più adatto.
+Questo intervento ha reso più chiara la separazione tra dominio, servizi e interfaccia grafica.
+
+Ho inoltre corretto alcuni aspetti legati all’interpretazione delle regole Prolog, in modo da rendere più affidabile la validazione delle risposte.
+Questo lavoro è stato fondamentale per gestire correttamente i quiz basati su Prolog, soprattutto nelle domande a risposta multipla.
+
+```
+def validateMultipleChoice(
+    levelKnowledge: String,
+    userAnswer: String,
+    correctAnswer: String
+    ): Boolean =
+    try
+        val normalizedUser = userAnswer.trim
+        val normalizedCorrect = correctAnswer.trim
+        
+        // Verifica che entrambe siano codice Prolog corretto
+        val userTheory = new Theory(levelKnowledge + "\n" + normalizedUser)
+        val correctTheory = new Theory(levelKnowledge + "\n" + normalizedCorrect)
+      
+        normalizedUser == normalizedCorrect
+    catch
+        case _: Exception => false
+```
+
+### **LevelRepository**
+Ho contribuito anche alla parte di caricamento dei livelli, intervenendo sulla gestione del repository in modo da rendere più robusta la lettura del file `levels.json`.
+Questo ha permesso all’applicazione di reperire correttamente i dati dei livelli sia dalle risorse interne sia dal percorso di esecuzione locale, facilitando la fase di deployment
+ed il popolamento dei livelli.
+
+```
+private def loadFromResource(): Option[List[Level]] =
+
+  try
+    Option(getClass.getResourceAsStream("/levels.json")).flatMap { stream =>
+      try
+        val content = Source.fromInputStream(stream).mkString
+        if content.isBlank then Some(List.empty)
+        else
+          try Some(read[List[Level]](content))
+          catch case _ => Some(List.empty)
+      finally stream.close()
+    }
+  catch
+    case _ => None
+```
+---
+
+## View
+
+### **SplashView**
+Ho lavorato sulla schermata iniziale dell’applicazione, curando la splash screen mostrata all’avvio.
+L’obiettivo era offrire un primo impatto semplice e pulito, coerente con l’identità visiva del progetto.
+
+### **UIComponents**
+Ho contribuito allo sviluppo dei componenti grafici riutilizzabili, così da uniformare lo stile dell’applicazione e ridurre la duplicazione di codice.
+In particolare, questa parte ha permesso di centralizzare elementi comuni come pulsanti stilizzati, layout di base, logo e finestre di conferma personalizzate.
+
+### **QuizMultiplePage**
+Ho lavorato alla schermata del quiz a risposta multipla, curando la disposizione degli elementi e la gestione delle interazioni dell’utente.
+L’obiettivo era mantenere un’interfaccia chiara e coerente con il resto dell’applicazione, rendendo la selezione della risposta semplice e immediata.
+
+### **StatsPage**
+Ho contribuito anche alla schermata delle statistiche dell’utente, che mostra in modo ordinato i progressi accumulati durante l’utilizzo dell’applicazione.
+Questa vista consente di visualizzare i dati in una forma più leggibile e rappresenta un completamento naturale del percorso di gioco.
+
+
+Ho lavorato nel complesso sulla coerenza del flusso tra le varie schermate del quiz, così da rendere il passaggio tra domande, feedback e riepilogo finale più fluido e intuitivo per l’utente.
+
 
 <p align="right">
   <a href="testing.html"> Testing →</a>
