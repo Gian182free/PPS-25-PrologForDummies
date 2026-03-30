@@ -1,4 +1,3 @@
----
 layout: default
 title: Testing
 nav_order: 7
@@ -88,6 +87,37 @@ Il test verifica che la logica inserita dall'utente sia semanticamente corretta.
     )
 
     assert(q.isCorrect(userCode, staticTheory))
+  }
+```
+
+#### 3. Test delle domande a risposta multipla
+
+È stata realizzata anche una piccola suite di test dedicata al modello `Question` per verificare il comportamento delle domande a risposta multipla.  
+In particolare, i test controllano che la domanda venga inizializzata correttamente e che il metodo `isCorrect` restituisca l’esito atteso sia nel caso di risposta corretta sia in quello di risposta errata.
+
+```
+test("La lista delle risposte deve contenere la risposta corretta (MultipleChoice)") {
+    val question = Question(
+      id = 1,
+      question = "Qual è la capitale d'Italia?",
+      correctAnswer = "Roma",
+      answers = List("Roma", "Milano", "Napoli"),
+      qType = QuestionType.MultipleChoice
+    )
+
+    assert(question.answers.contains(question.correctAnswer))
+  }
+  
+test("isCorrect dovrebbe restituire falso per la risposta sbagliata (MultipleChoice)") {
+    val question = Question(
+      id = 1,
+      question = "Qual è la capitale della Francia?",
+      correctAnswer = "Parigi",
+      answers = List("Roma", "Berlino", "Parigi"),
+      qType = QuestionType.MultipleChoice
+    )
+
+    assert(!question.isCorrect("Roma"))
   }
 ```
 
