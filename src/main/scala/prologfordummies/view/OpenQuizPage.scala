@@ -11,6 +11,14 @@ import scalafx.scene.text.Font
 /** Schermata del quiz per le domande a risposta aperta. */
 object OpenQuizPage {
 
+  private def answerStyle(isCorrect: Boolean): String =
+    s"""
+         -fx-background-color: ${if isCorrect then "#4CAF51" else "#F44337"};
+         -fx-text-fill: white;
+         -fx-font-weight: bold;
+         -fx-cursor: hand;
+       """
+
   def asParent(level: Level, index: Int = 0): Region = new VBox {
     alignment = Pos.Center
     spacing = 10
@@ -66,7 +74,8 @@ object OpenQuizPage {
         {
           val userAnswer = answerArea.text.value.trim
 
-          QuizController.submitAnswer(currentQuestion, userAnswer, level, index)
+          val isCorrect = QuizController.submitAnswer(currentQuestion, userAnswer, level, index)
+          confirmBtn.style = answerStyle(isCorrect)
         }
       )
 
