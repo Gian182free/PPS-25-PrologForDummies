@@ -19,4 +19,14 @@
 * **Build Tool**: sbt
 * **Testing**: ScalaTest
 
+## Come avviare l'App
+
+### 1. Tramite il file Eseguibile (JAR)
+
+* È sufficiente un **doppio clic** sul file `PfD.-.Prolog.for.Dummies-assembly-0.1.0-SNAPSHOT.jar` se in possesso di Java >=17.0
+* In alternativa, da terminale: `java -jar PfD.-.Prolog.for.Dummies-assembly-0.1.0-SNAPSHOT.jar`
+
+### 2. Tramite ambiente di sviluppo (SBT)
+
+* Digita `sbt run` nella directory principale del progetto
 
